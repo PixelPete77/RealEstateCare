@@ -18,7 +18,7 @@ import HelloWorld from './components/HelloWorld.vue'
 <style scoped>
 .logo {
   display: block;
-  margin: 0 auto 2rem;
+  margin: 0 auto 3rem;
 }
 
 @media (min-width: 1024px) {
