@@ -4,9 +4,8 @@ import HelloWorld from './components/HelloWorld.vue'
 
 <template>
   <header>
-    <img alt="Real Estate Care logo" class="logo" src="./assets/images/RealEstateCare_logo_v.svg" width="180" height="114" />
-
     <div class="wrapper">
+      <img alt="Real Estate Care logo" class="logo" src="./assets/images/RealEstateCare_logo_v.svg" width="240" height="152" />
       <HelloWorld msg="Hello world!" />
     </div>
   </header>
@@ -17,10 +16,6 @@ import HelloWorld from './components/HelloWorld.vue'
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
 .logo {
   display: block;
   margin: 0 auto 2rem;
@@ -29,18 +24,11 @@ header {
 @media (min-width: 1024px) {
   header {
     display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
   }
 
   header .wrapper {
     display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
 }
 </style>
