@@ -1,10 +1,7 @@
 <script setup>
     import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
     import DashboardCard from '@/components/dashboard/DashboardCard.vue';
-    import CompletedIcon from '@/components/icons/CompletedIcon.vue';
-    import ScheduledIcon from '@/components/icons/ScheduledIcon.vue';
-    import KnowledgeBaseIcon from '@/components/icons/KnowledgeBaseIcon.vue';
-    import SettingsIcon from '@/components/icons/SettingsIcon.vue';
+    import { CompletedIcon, KnowledgeBaseIcon, ScheduledIcon, SettingsIcon } from '@/components/icons/'
 </script>
 
 <template>
