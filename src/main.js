@@ -20,6 +20,8 @@ import '@ionic/vue/css/typography.css';
 // import '@ionic/vue/css/flex-utils.css';
 // import '@ionic/vue/css/display.css';
 
+import './assets/css/main.css';
+
 const app = createApp(App).use(IonicVue).use(router);
 
 router.isReady().then(() => {
