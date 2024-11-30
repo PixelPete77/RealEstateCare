@@ -12,7 +12,7 @@
             </ion-toolbar>
         </ion-header>
 
-        <ion-content :fullscreen="true">
+        <ion-content class="arc-bg" :fullscreen="true">
             <div id="wrapper">
                 <DashboardCard text="Scheduled inspections">
                     <ScheduledIcon />
@@ -46,5 +46,4 @@
         margin: auto;
         padding: 1rem;
     }
-    
 </style>
