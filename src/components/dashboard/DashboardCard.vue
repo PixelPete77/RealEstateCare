@@ -14,7 +14,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
     .dashboard-card {
         --c-dashboard-card-icon: var(--c-primary);
         
@@ -24,7 +24,7 @@
         text-align: center;
     }
     
-    .dashboard-card svg {
+    :deep(svg) {
         inline-size: 4rem;
         display: block;
         stroke: var(--c-dashboard-card-icon);
