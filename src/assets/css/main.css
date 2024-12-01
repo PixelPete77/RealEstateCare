@@ -1,24 +1,19 @@
 :root {
   --c-primary: rgb(0 170 162);
-  --vt-c-white: #fff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
+  
+  --ion-color-primary: #00aaa2;
+  --ion-color-primary-rgb: 0, 170, 162;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #00968f;
+  --ion-color-primary-tint: #1ab3ab;
 
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: rgb(44, 62, 80);
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+  --ion-color-dark: #141b1f;
+  --ion-color-dark-rgb: 20, 27, 31;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #12181b;
+  --ion-color-dark-tint: #2c3235;
 }
 
 /* semantic color variables for this project */
@@ -27,24 +22,13 @@
   --color-background-soft: var(--vt-c-white-soft);
   --color-background-mute: var(--vt-c-white-mute);
 
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --c-heading: var(--c-primary);
-  --c-text: var(--vt-c-text-light-1);
+  --c-heading: var(--ion-color-primary);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
 
     --c-heading: var(--vt-c-text-dark-1);
-    --c-text: var(--vt-c-text-dark-2);
   }
 }
 
@@ -59,7 +43,7 @@
 body {
   min-block-size: 100vh;
   min-block-size: 100dvh;
-  background-color: var(--color-background);
+  /* background-color: var(--color-background); */
   transition: color .5s, background-color .5s;
   font-weight: 400;
   font-size: 1rem;
@@ -89,11 +73,36 @@ h1{
 
 }
 
-ion-footer ion-toolbar {
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+ion-header ion-toolbar {
+  padding-inline: 1rem;
+}
+
+ion-header .logo {
+  block-size: 56px;
+}
+
+/* ion-header ion-toolbar {
   --background: var(--c-primary);
 }
 
+ion-footer ion-toolbar {
+  --background: var(--c-primary);
+} */
+
 ion-content.arc-bg {
-  --background: -2px 0%/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
-                calc(100% + 2px) 100%/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
+  --background: -2px var(--offset-top)/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
+                calc(100% + 2px) calc(100% - var(--offset-bottom))/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
+  /* Use Ionics calculated offset to 'undo' the offset so the background images don't partially disappear behind the header and footer component */
 }
