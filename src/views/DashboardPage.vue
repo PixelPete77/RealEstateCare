@@ -7,13 +7,14 @@
 <template>
     <ion-page>
         <ion-header>
-            <ion-toolbar>
-                <ion-title>Blank</ion-title>
+            <ion-toolbar color="dark">
+                <img src="/src/assets/images/RealEstateCare_logo.svg" class="logo" slot="start">
             </ion-toolbar>
         </ion-header>
 
         <ion-content class="arc-bg" :fullscreen="true">
-            <div id="wrapper">
+            <h1 class="sr-only">Dashboard</h1>
+            <nav id="wrapper">
                 <DashboardCard text="Scheduled inspections">
                     <ScheduledIcon />
                 </DashboardCard>
@@ -26,10 +27,10 @@
                 <DashboardCard text="Settings">
                     <SettingsIcon />
                 </DashboardCard>
-            </div>
+            </nav>
         </ion-content>
         <ion-footer>
-            <ion-toolbar>
+            <ion-toolbar color="primary">
                 <ion-title>Footer</ion-title>
             </ion-toolbar>
         </ion-footer>
