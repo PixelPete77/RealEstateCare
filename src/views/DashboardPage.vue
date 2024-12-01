@@ -1,7 +1,9 @@
 <script setup>
     import { IonContent, IonHeader, IonFooter, IonPage, IonToolbar } from '@ionic/vue';
     import DashboardCard from '@/components/dashboard/DashboardCard.vue';
-    import { AvatarIcon, CompletedIcon, KnowledgeBaseIcon, NotificationsIcon, ScheduledIcon, SettingsIcon } from '@/components/icons/'
+    import MainMenu from '@/components/mainmenu/MainMenu.vue';
+    import MainMenuItem from '@/components/mainmenu/MainMenuItem.vue';
+    import { AvatarIcon, CompletedIcon, HelpIcon, KnowledgeBaseIcon, NotificationsIcon, ScheduledIcon, SettingsIcon } from '@/components/icons/'
 </script>
 
 <template>
@@ -39,7 +41,20 @@
         </ion-content>
         <ion-footer>
             <ion-toolbar color="primary">
-                
+                <MainMenu>
+                    <MainMenuItem link="Scheduled inspections">
+                        <ScheduledIcon />
+                    </MainMenuItem>
+                    <MainMenuItem link="Completed inspections">
+                        <CompletedIcon />
+                    </MainMenuItem>
+                    <MainMenuItem link="Knowledge base">
+                        <KnowledgeBaseIcon />
+                    </MainMenuItem>
+                    <MainMenuItem link="Help">
+                        <HelpIcon />
+                    </MainMenuItem>
+                </MainMenu>
             </ion-toolbar>
         </ion-footer>
     </ion-page>
