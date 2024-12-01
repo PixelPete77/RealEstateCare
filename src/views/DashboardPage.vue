@@ -1,5 +1,5 @@
 <script setup>
-    import { IonContent, IonHeader, IonFooter, IonPage, IonToolbar } from '@ionic/vue';
+    import { IonButton, IonContent, IonHeader, IonFooter, IonPage, IonToolbar } from '@ionic/vue';
     import DashboardCard from '@/components/dashboard/DashboardCard.vue';
     import MainMenu from '@/components/mainmenu/MainMenu.vue';
     import MainMenuItem from '@/components/mainmenu/MainMenuItem.vue';
@@ -12,12 +12,12 @@
             <ion-toolbar color="dark">
                 <img src="/src/assets/images/RealEstateCare_logo.svg" class="logo" slot="start">
                 <div slot="end">
-                    <button>
-                        <NotificationsIcon />
-                    </button>
-                    <button>
-                        <AvatarIcon />
-                    </button>
+                    <ion-button color="dark" size="large">
+                        <NotificationsIcon slot="icon-only"/>
+                    </ion-button>
+                    <ion-button color="dark" size="large">
+                        <AvatarIcon slot="icon-only" />
+                    </ion-button>
                 </div>
             </ion-toolbar>
         </ion-header>
@@ -76,7 +76,7 @@
         padding: .75rem;
     }
     
-    ion-header button svg {
+    ion-header ion-button svg {
         inline-size: 1.5rem;
     }
 
