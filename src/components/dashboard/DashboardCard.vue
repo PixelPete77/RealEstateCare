@@ -9,8 +9,10 @@
 
 <template>
     <div class="dashboard-card">
-        <slot></slot>
-        {{ text }}
+        <a href="#">
+            <slot></slot>
+            {{ text }}
+        </a>
     </div>
 </template>
 
@@ -28,6 +30,20 @@
         backdrop-filter: blur(5px);
         border-radius: .5rem;
         box-shadow: var(--dashboard-shadow);
+        
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .dashboard-card {
+            --dashboard-bg: rgb(41 52 57 / .8);
+            --dashboard-shadow-color: 0deg 0% 0%;
+        }
+    }
+
+    a {
+        block-size: 100%;
+        color: inherit;
+        cursor: pointer;
         display: grid;
         align-items: center;
         justify-items: center;
@@ -36,13 +52,7 @@
         font-size: 1.5rem;
         padding: 1rem;
         text-align: center;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .dashboard-card {
-            --dashboard-bg: rgb(41 52 57 / .8);
-            --dashboard-shadow-color: 0deg 0% 0%;
-        }
+        text-decoration: none;
     }
     
     :deep(svg) {

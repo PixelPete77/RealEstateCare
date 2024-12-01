@@ -88,5 +88,5 @@ h1{
 ion-content.arc-bg {
   --background: -2px var(--offset-top)/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
                 calc(100% + 2px) calc(100% - var(--offset-bottom))/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
-  /* Use Ionics calculated offset to 'undo' the offset so the background images don't partially disappear behind the header and footer component */
+  /* Use Ionics calculated offset to 'undo' the offset, so the background images don't partially disappear behind the header and footer component */
 }
