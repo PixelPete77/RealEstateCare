@@ -1,7 +1,7 @@
 <script setup>
-    import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+    import { IonContent, IonHeader, IonFooter, IonPage, IonToolbar } from '@ionic/vue';
     import DashboardCard from '@/components/dashboard/DashboardCard.vue';
-    import { CompletedIcon, KnowledgeBaseIcon, ScheduledIcon, SettingsIcon } from '@/components/icons/'
+    import { AvatarIcon, CompletedIcon, KnowledgeBaseIcon, NotificationsIcon, ScheduledIcon, SettingsIcon } from '@/components/icons/'
 </script>
 
 <template>
@@ -9,6 +9,14 @@
         <ion-header>
             <ion-toolbar color="dark">
                 <img src="/src/assets/images/RealEstateCare_logo.svg" class="logo" slot="start">
+                <div slot="end">
+                    <button>
+                        <NotificationsIcon />
+                    </button>
+                    <button>
+                        <AvatarIcon />
+                    </button>
+                </div>
             </ion-toolbar>
         </ion-header>
 
@@ -31,13 +39,32 @@
         </ion-content>
         <ion-footer>
             <ion-toolbar color="primary">
-                <ion-title>Footer</ion-title>
+                
             </ion-toolbar>
         </ion-footer>
     </ion-page>
 </template>
   
 <style scoped>
+    ion-header ion-toolbar {
+        padding-inline: 1rem;
+    }
+
+    ion-header .logo {
+        block-size: 56px;
+        margin-block: .5rem;
+    }
+
+    ion-header button {
+        background: none;
+        color: inherit;
+        padding: .75rem;
+    }
+    
+    ion-header button svg {
+        inline-size: 1.5rem;
+    }
+
     #wrapper {
         block-size: 100%;
         max-inline-size: 42rem;

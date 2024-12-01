@@ -85,22 +85,6 @@ h1{
   border-width: 0;
 }
 
-ion-header ion-toolbar {
-  padding-inline: 1rem;
-}
-
-ion-header .logo {
-  block-size: 56px;
-}
-
-/* ion-header ion-toolbar {
-  --background: var(--c-primary);
-}
-
-ion-footer ion-toolbar {
-  --background: var(--c-primary);
-} */
-
 ion-content.arc-bg {
   --background: -2px var(--offset-top)/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
                 calc(100% + 2px) calc(100% - var(--offset-bottom))/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
