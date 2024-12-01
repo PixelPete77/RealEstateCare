@@ -16,7 +16,7 @@
 
 <style scoped>
     .dashboard-card {
-        --dashboard-bg: hsl(0deg 0% 100% / .8);
+        --dashboard-bg: rgb(255 255 255 / .8);
         --dashboard-card-icon-color: var(--c-primary);
         --dashboard-shadow-color: 0deg 0% 63%;
         --dashboard-shadow: 0 .4px .5px hsl(var(--dashboard-shadow-color) / 0.33),
@@ -36,6 +36,13 @@
         font-size: 1.5rem;
         padding: 1rem;
         text-align: center;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .dashboard-card {
+            --dashboard-bg: rgb(41 52 57 / .8);
+            --dashboard-shadow-color: 0deg 0% 0%;
+        }
     }
     
     :deep(svg) {
