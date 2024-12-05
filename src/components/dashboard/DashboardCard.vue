@@ -1,5 +1,11 @@
 <script setup>
+    import { RouterLink } from 'vue-router';
+
     const props = defineProps({
+        link: {
+            type: String,
+            required: true
+        },
         text: {
             type: String,
             required: true
@@ -9,10 +15,10 @@
 
 <template>
     <div class="dashboard-card">
-        <a href="#">
+        <router-link :to="link">
             <slot></slot>
             {{ text }}
-        </a>
+        </router-link>
     </div>
 </template>
 
@@ -35,7 +41,7 @@
 
     @media (prefers-color-scheme: dark) {
         .dashboard-card {
-            --dashboard-bg: rgb(41 52 57 / .8);
+            --dashboard-bg: rgb(41 52 57 / .85);
             --dashboard-shadow-color: 0deg 0% 0%;
         }
     }
