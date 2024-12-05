@@ -4,7 +4,7 @@
 
 <template>
     <ion-page>
-        <ion-content class="arc-bg" :fullscreen="true">
+        <ion-content>
             <h1>Knowledge base</h1>
             
         </ion-content>
