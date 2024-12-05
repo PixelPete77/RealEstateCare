@@ -3,16 +3,20 @@
         link: {
             type: String,
             required: true
+        },
+        text: {
+            type: String,
+            required: true
         }
     })
 </script>
 
 <template>
     <li>
-        <a>
+        <router-link :to="link">
             <slot></slot>
-            {{ link }}
-        </a>
+            {{ text }}
+        </router-link>
     </li>
 </template>
 
