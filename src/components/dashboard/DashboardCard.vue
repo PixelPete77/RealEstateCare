@@ -14,12 +14,10 @@
 </script>
 
 <template>
-    <div class="dashboard-card">
-        <router-link :to="link">
-            <slot></slot>
-            {{ text }}
-        </router-link>
-    </div>
+    <router-link class="dashboard-card" :to="link">
+        <slot></slot>
+        {{ text }}
+    </router-link>
 </template>
 
 <style scoped>
@@ -32,22 +30,11 @@
                             .1px 3px 3.4px -1.7px hsl(var(--dashboard-shadow-color) / 0.33),
                             .2px 7.2px 8.1px -2.5px hsl(var(--dashboard-shadow-color) / 0.33);
         
+        block-size: 100%;
         background: var(--dashboard-bg);
         backdrop-filter: blur(5px);
         border-radius: .5rem;
         box-shadow: var(--dashboard-shadow);
-        
-    }
-
-    @media (prefers-color-scheme: dark) {
-        .dashboard-card {
-            --dashboard-bg: rgb(41 52 57 / .85);
-            --dashboard-shadow-color: 0deg 0% 0%;
-        }
-    }
-
-    a {
-        block-size: 100%;
         color: inherit;
         cursor: pointer;
         display: grid;
@@ -59,6 +46,13 @@
         padding: 1rem;
         text-align: center;
         text-decoration: none;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .dashboard-card {
+            --dashboard-bg: rgb(41 52 57 / .85);
+            --dashboard-shadow-color: 0deg 0% 0%;
+        }
     }
     
     :deep(svg) {
