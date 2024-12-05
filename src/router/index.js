@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
-import Dashboard from '@/views/DashboardPage.vue';
 
 const routes = [
     {
@@ -9,7 +8,20 @@ const routes = [
     {
       path: '/home',
       name: 'Home',
-      component: Dashboard,
+      component: () => import('@/views/DashboardPage.vue'),
+      meta: { layout: 'default' },
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: () => import('@/views/LoginPage.vue'),
+      meta: { layout: 'login' },
+    },
+    {
+      path: '/scheduled',
+      name: 'Scheduled inspections',
+      component: () => import('@/views/ScheduledInspectionsPage.vue'),
+      meta: { layout: 'default' },
     },
 ];
 
