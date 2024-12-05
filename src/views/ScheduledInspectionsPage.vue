@@ -4,9 +4,8 @@
 
 <template>
     <ion-page>
-        <ion-content class="arc-bg" :fullscreen="true">
+        <ion-content>
             <h1>Scheduled inspections</h1>
-            
         </ion-content>
     </ion-page>
 </template>

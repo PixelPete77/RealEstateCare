@@ -1,5 +1,5 @@
 <script setup>
-    import { IonContent, IonPage } from '@ionic/vue';
+    import { IonContent, IonFooter, IonHeader, IonPage } from '@ionic/vue';
     import HeaderContent from '../header/HeaderContent.vue';
     import MainMenu from '../mainmenu/MainMenu.vue';
 
@@ -7,10 +7,14 @@
 
 <template>
     <ion-page>
-        <HeaderContent />
-        <ion-content>
+        <ion-header>
+            <HeaderContent />
+        </ion-header>
+        <ion-content class="arc-bg">
             <slot></slot>
         </ion-content>
-        <MainMenu />
+        <ion-footer>
+            <MainMenu />
+        </ion-footer>
     </ion-page>
 </template>

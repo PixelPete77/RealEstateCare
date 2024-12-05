@@ -1,27 +1,29 @@
 <script setup>
-    import { IonContent } from '@ionic/vue';
+    import { IonContent, IonPage } from '@ionic/vue';
     import DashboardCard from '@/components/dashboard/DashboardCard.vue';
-    import { AvatarIcon, CompletedIcon, HelpIcon, KnowledgeBaseIcon, NotificationsIcon, ScheduledIcon, SettingsIcon } from '@/components/icons/'
+    import { CompletedIcon, KnowledgeBaseIcon, ScheduledIcon, SettingsIcon } from '@/components/icons/'
 </script>
 
 <template>
-    <ion-content class="arc-bg" :fullscreen="true">
-        <h1 class="sr-only">Dashboard</h1>
-        <nav id="wrapper">
-            <DashboardCard text="Scheduled inspections">
-                <ScheduledIcon />
-            </DashboardCard>
-            <DashboardCard text="Completed inspections">
-                <CompletedIcon />
-            </DashboardCard>
-            <DashboardCard text="Knowledge base">
-                <KnowledgeBaseIcon />
-            </DashboardCard>
-            <DashboardCard text="Settings">
-                <SettingsIcon />
-            </DashboardCard>
-        </nav>
-    </ion-content>
+    <ion-page>
+        <ion-content>
+            <h1 class="sr-only">Dashboard</h1>
+            <nav id="wrapper">
+                <DashboardCard link="scheduled" text="Scheduled inspections">
+                    <ScheduledIcon />
+                </DashboardCard>
+                <DashboardCard link="completed" text="Completed inspections">
+                    <CompletedIcon />
+                </DashboardCard>
+                <DashboardCard link="knowledge-base" text="Knowledge base">
+                    <KnowledgeBaseIcon />
+                </DashboardCard>
+                <DashboardCard link="settings" text="Settings">
+                    <SettingsIcon />
+                </DashboardCard>
+            </nav>
+        </ion-content>
+    </ion-page>
 </template>
   
 <style scoped>

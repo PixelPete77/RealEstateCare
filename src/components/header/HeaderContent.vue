@@ -1,22 +1,23 @@
 <script setup>
-    import { IonButton, IonHeader, IonToolbar } from '@ionic/vue';
+    import { RouterLink } from 'vue-router';
+    import { IonButton, IonToolbar } from '@ionic/vue';
     import { AvatarIcon, NotificationsIcon } from '@/components/icons/'
 </script>
 
 <template>
-    <ion-header>
-        <ion-toolbar color="dark">
+    <ion-toolbar color="dark">
+        <router-link to="/">
             <img src="/src/assets/images/RealEstateCare_logo.svg" class="logo" slot="start">
-            <div slot="end">
-                <ion-button color="dark" size="large">
-                    <NotificationsIcon slot="icon-only"/>
-                </ion-button>
-                <ion-button color="dark" size="large">
-                    <AvatarIcon slot="icon-only" />
-                </ion-button>
-            </div>
-        </ion-toolbar>
-    </ion-header>
+        </router-link>
+        <div slot="end">
+            <ion-button color="dark" size="large">
+                <NotificationsIcon slot="icon-only"/>
+            </ion-button>
+            <ion-button color="dark" size="large">
+                <AvatarIcon slot="icon-only" />
+            </ion-button>
+        </div>
+    </ion-toolbar>
 </template>
 
 <style scoped>

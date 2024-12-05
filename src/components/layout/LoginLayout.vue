@@ -4,7 +4,7 @@
 
 <template>
     <ion-page>
-        <ion-content>
+        <ion-content class="arc-bg" :fullscreen="true">
             <slot></slot>
         </ion-content>
     </ion-page>
