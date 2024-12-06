@@ -18,17 +18,14 @@
 
 /* semantic color variables for this project */
 :root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
   --c-heading: var(--ion-color-primary);
+
+  --c-wrapper-bg: rgba(255 255 255 / .85);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-
-    --c-heading: var(--vt-c-text-dark-1);
+    --c-wrapper-bg: rgba(var(--ion-color-dark-rgb) / .85);
   }
 }
 
@@ -41,9 +38,6 @@
 }
 
 body {
-  min-block-size: 100vh;
-  min-block-size: 100dvh;
-  /* background-color: var(--color-background); */
   transition: color .5s, background-color .5s;
   font-weight: 400;
   font-size: 1rem;
@@ -65,13 +59,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1{
+h1, h2, h3 {
+  margin-top: 0;
+}
+
+h1 {
   color: var(--c-heading);
+  text-align: center;
 }
 
-#app {
-
+.wrapper {
+  background: var(--c-wrapper-bg);
+  backdrop-filter: blur(5px);
+  max-inline-size: 64rem;
+  margin-inline: auto;
+  padding: 1.5rem .5rem 3rem;
 }
+
+
+
+ion-content ion-content {
+  --background: transparent;
+}
+
+ion-content.arc-bg {
+  --background: -2px var(--offset-top)/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
+                calc(100% + 2px) calc(100% - var(--offset-bottom))/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
+  /* Use Ionics calculated offset to 'undo' the offset, so the background images don't partially disappear behind the header and footer component */
+}
+
+
+/* Utility */
 
 .sr-only {
   position: absolute;
@@ -83,10 +101,4 @@ h1{
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border-width: 0;
-}
-
-ion-content.arc-bg {
-  --background: -2px var(--offset-top)/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
-                calc(100% + 2px) calc(100% - var(--offset-bottom))/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
-  /* Use Ionics calculated offset to 'undo' the offset, so the background images don't partially disappear behind the header and footer component */
 }
