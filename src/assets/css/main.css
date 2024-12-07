@@ -16,16 +16,30 @@
   --ion-color-dark-tint: #2c3235;
 }
 
-/* semantic color variables for this project */
+/* semantic variables for this project */
 :root {
   --c-heading: var(--ion-color-primary);
 
-  --c-wrapper-bg: rgba(255 255 255 / .85);
+  --c-wrapper-bg: rgba(255, 255, 255, .85);
+
+  --ion-font-family: 
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --c-wrapper-bg: rgba(var(--ion-color-dark-rgb) / .85);
+    --c-wrapper-bg: rgba(var(--ion-color-dark-rgb), .85);
   }
 }
 
@@ -70,13 +84,14 @@ h1 {
 }
 
 .wrapper {
+  min-block-size: 100%;
   background: var(--c-wrapper-bg);
   backdrop-filter: blur(5px);
-  max-inline-size: 64rem;
+  max-inline-size: 70rem;
   margin-inline: auto;
   padding: 1.5rem .5rem 3rem;
+  padding-inline: clamp(0.5rem, -0.56rem + 4vw, 2rem);
 }
-
 
 
 ion-content ion-content {
