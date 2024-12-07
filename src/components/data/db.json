@@ -1,0 +1,147 @@
+{
+    "inspections": [
+        {
+            "id": 1,
+            "inspectorId": 1,
+            "date": "2024-12-05",
+            "completedDate": "2024-12-07",
+            "address": {
+                "street": "59 Nevern Square",
+                "city": "Earls Court",
+                "zip-code": "SW5 9PN",
+                "province": "London"
+            },
+            "damage": [
+                {
+                    "location": "kitchen",
+                    "new": true,
+                    "type": "wear",
+                    "date": "2024-12-07",
+                    "urgent": false,
+                    "description": "Some handles for the kitchen drawers are loose.",
+                    "photos": []
+                }
+            ],
+            "maintenance": [
+                {
+                    "location": "balcony",
+                    "type": "painting",
+                    "urgent": false,
+                    "costIndication": "500 - 1000",
+                    "photos": []
+                }
+            ],
+            "installations": [
+                {
+                    "location": "livingroom",
+                    "type": "heating",
+                    "fault": "Radiator near the window is not responding.",
+                    "procedure": "TODO: add link to document in knowledge base",
+                    "approved": true,
+                    "comments": "",
+                    "photos": []
+                }
+            ],
+            "modifications": [
+                {
+                    "situation": "Link to PDF document",
+                    "location": "kitchen",
+                    "doneBy": "Contractor",
+                    "description": "CV moved from balcony space to the kitchen",
+                    "action": "Accept",
+                    "comments": "New situation has been assessed and the work has been done to relevant standards.",
+                    "photos": []
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "inspectorId": 1,
+            "date": "2024-12-07",
+            "completedDate": "2024-12-08",
+            "address": {
+                "street": "23 Francis Street",
+                "city": "Westminster",
+                "zip-code": "SW1P 1DN",
+                "province": "London"
+            },
+            "damage": [
+                {
+                    "location": "kitchen",
+                    "new": true,
+                    "type": "wear",
+                    "date": "2024-12-07",
+                    "urgent": false,
+                    "description": "Some handles for the kitchen drawers are loose.",
+                    "photos": []
+                }
+            ],
+            "maintenance": [],
+            "installations": [],
+            "modifications": []
+        }
+        ,
+        {
+            "id": 3,
+            "inspectorId": 2,
+            "date": "2024-12-06",
+            "completedDate": "2024-12-08",
+            "address": {
+                "street": "7-9 Montpelier Vale",
+                "city": "Blackheath",
+                "zip-code": "SE3 0TA",
+                "province": "London"
+            },
+            "damage": [],
+            "maintenance": [
+                {
+                    "location": "bathroom",
+                    "type": "piping",
+                    "urgent": true,
+                    "costIndication": "0 - 500",
+                    "photos": []
+                }
+            ],
+            "installations": [],
+            "modifications": []
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "username": "inspector1@realestatecare.com",
+            "password": "Inspector1",
+            "code": 123456,
+            "firstName": "Robert",
+            "lastName": "Flynn",
+            "settings": {
+                "theme": "system",
+                "notifications": true
+            }
+        },
+        {
+            "id": 2,
+            "username": "inspector2@realestatecare.com",
+            "password": "Inspector2",
+            "code": 123456,
+            "firstName": "Phil",
+            "lastName": "Anselmo",
+            "settings": {
+                "theme": "system",
+                "notifications": false
+            }
+        },
+        {
+            "id": 3,
+            "username": "inspector3@realestatecare.com",
+            "password": "Inspector3",
+            "code": 123456,
+            "firstName": "Randy",
+            "lastName": "Blythe",
+            "settings": {
+                "theme": "dark",
+                "notifications": true
+            }
+        }
+    ]
+}
