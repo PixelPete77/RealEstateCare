@@ -41,23 +41,23 @@
                 <h1>Scheduled inspections</h1>
                 <!-- Show loading indicator when status = loading -->
                 <div v-if="loading">
-                    <h3 style="margin: 0 auto;">Loading...</h3>
+                    <h2 style="margin: 0 auto;">Loading...</h2>
                     
                 </div>
 
                 <!-- Show the error when loading inpections failed -->
                 <div v-if="error" class="alert alert-danger">
-                    <h3>Error!</h3>
+                    <h2>Error!</h2>
                     <p>{{ error }}</p>
                 </div>
 
                 <!-- List with inspection data -->
                 <ul v-if="sortedInspections && sortedInspections.length">
                     <InspectionListItem v-for="inspection of sortedInspections"
-                        :key="inspection.id">
-                        <template v-slot:id>Inspection #{{ inspection.id }}</template>
-                        <template v-slot:date>{{ inspection.date }}</template>
-                        <template v-slot:address>{{ inspection.address.street }}, {{ inspection.address.city }}, {{ inspection.address.province }}</template>
+                        :key="inspection.id"
+                        :address="inspection.address"
+                        :date="inspection.date"
+                        :id="inspection.id">
                     </InspectionListItem>
                 </ul>
             </div>

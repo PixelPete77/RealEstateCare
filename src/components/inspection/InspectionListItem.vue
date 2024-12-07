@@ -1,21 +1,34 @@
 <script setup>
+    import { computed } from 'vue';
     import { IonButton } from '@ionic/vue';
     import ArrowRightIcon from '@/components/icons/ArrowRightIcon.vue';
+
+    const props = defineProps({
+        address: { type: Object, required: true },
+        id: { type: Number, required: true },
+        date: { type: String, required: true }
+    });
+
+    const formattedDate = computed(() => {
+        // Change received JSON date format to dd/mm/yyyy
+        const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+        return new Date(props.date).toLocaleDateString('en-GB', options);
+    })
 </script>
 
 <template>
     <li>
         <div>
             <h2>
-                <slot name="id"></slot>
+                Inspection #{{ id }}
             </h2>
             <p>
                 <span>Date:</span>
-                <slot name="date"></slot>
+                {{ formattedDate }}
             </p>
             <p>
                 <span>Address:</span>
-                <slot name="address"></slot>
+                {{ address.street }}, {{ address.city }}, {{ address.zipCode }}, {{ address.province }}
             </p>
         </div>
         <ion-button>
