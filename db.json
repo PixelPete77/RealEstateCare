@@ -9,7 +9,7 @@
                 "street": "59 Nevern Square",
                 "city": "Earls Court",
                 "province": "London",
-                "zip-code": "SW5 9PN"
+                "zipCode": "SW5 9PN"
             },
             "damage": [
                 {
@@ -63,7 +63,7 @@
                 "street": "23 Francis Street",
                 "city": "Westminster",
                 "province": "London",
-                "zip-code": "SW1P 1DN"
+                "zipCode": "SW1P 1DN"
             },
             "damage": [
                 {
@@ -90,7 +90,7 @@
                 "street": "7-9 Montpelier Vale",
                 "city": "Blackheath",
                 "province": "London",
-                "zip-code": "SE3 0TA"
+                "zipCode": "SE3 0TA"
             },
             "damage": [],
             "maintenance": [
