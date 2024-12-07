@@ -60,11 +60,12 @@ body {
 }
 
 h1, h2, h3 {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 h1 {
   color: var(--c-heading);
+  margin-block-end: 1.5em;
   text-align: center;
 }
 

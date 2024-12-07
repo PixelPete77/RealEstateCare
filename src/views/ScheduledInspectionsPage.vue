@@ -1,6 +1,7 @@
 <script setup>
     import { computed, onMounted } from 'vue';
-    import { IonButton, IonContent, IonPage } from '@ionic/vue';
+    import { IonContent, IonPage } from '@ionic/vue';
+    import InspectionListItem from '@/components/inspection/InspectionListItem.vue';
     import { useInspectionsStore } from '@/components/stores/inspectionsStore';
 
     const store = useInspectionsStore();
@@ -12,9 +13,14 @@
 
     // Computed properties
     const inspections = computed(() => {
-        console.log("Inspections: ", store.inspections);
         return store.inspections;
     })
+
+    const sortedInspections = computed(() => {
+        return store.inspections.slice().sort((a, b) => {
+            return new Date(a.date) - new Date(b.date); // Sort the inspections by decending date
+        });
+    });
 
     const error = computed(() => {
         return store.errors;
@@ -45,14 +51,14 @@
                     <p>{{ error }}</p>
                 </div>
 
-                <!-- List with inpection data -->
-                <ul v-if="inspections && inspections.length">
-                    <li v-for="inspection of inspections"
+                <!-- List with inspection data -->
+                <ul v-if="sortedInspections && sortedInspections.length">
+                    <InspectionListItem v-for="inspection of sortedInspections"
                         :key="inspection.id">
-                        <h4>{{ inspection.date }}</h4>
-                        <p>{{ inspection.inspectorId }}</p>
-                        <p>{{ inspection.address.street }}, {{ inspection.address.city }}</p>
-                    </li>
+                        <template v-slot:id>Inspection #{{ inspection.id }}</template>
+                        <template v-slot:date>{{ inspection.date }}</template>
+                        <template v-slot:address>{{ inspection.address.street }}, {{ inspection.address.city }}, {{ inspection.address.province }}</template>
+                    </InspectionListItem>
                 </ul>
             </div>
         </ion-content>
@@ -60,5 +66,11 @@
 </template>
   
 <style scoped>
-    
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        list-style: none;
+        padding: 0;
+    }
 </style>

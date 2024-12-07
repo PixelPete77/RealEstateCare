@@ -1,3 +1,4 @@
+export { default as ArrowRightIcon } from './ArrowRightIcon.vue';
 export { default as AvatarIcon } from './AvatarIcon.vue';
 export { default as CompletedIcon } from './CompletedIcon.vue';
 export { default as HelpIcon } from './HelpIcon.vue';
