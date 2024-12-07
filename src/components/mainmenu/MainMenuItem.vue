@@ -26,6 +26,7 @@
     }
 
     a {
+        block-size: 100%;
         position: relative;
         color: #fff;
         display: flex;
