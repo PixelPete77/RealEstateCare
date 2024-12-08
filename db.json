@@ -13,9 +13,10 @@
             },
             "damage": [
                 {
-                    "location": "kitchen",
+                    "id": 1,
+                    "location": "Kitchen",
                     "new": true,
-                    "type": "wear",
+                    "type": "normal",
                     "date": "2024-11-07",
                     "urgent": false,
                     "description": "Some handles for the kitchen drawers are loose.",
@@ -24,7 +25,8 @@
             ],
             "maintenance": [
                 {
-                    "location": "balcony",
+                    "id": 1,
+                    "location": "Balcony railing",
                     "type": "painting",
                     "urgent": false,
                     "costIndication": "500-1000",
@@ -33,7 +35,8 @@
             ],
             "installations": [
                 {
-                    "location": "livingroom",
+                    "id": 1,
+                    "location": "Livingroom",
                     "type": "heating",
                     "fault": "Radiator near the window is not responding.",
                     "procedure": "TODO: add link to document in knowledge base",
@@ -44,6 +47,7 @@
             ],
             "modifications": [
                 {
+                    "id": 1,
                     "situation": "Link to PDF document",
                     "location": "kitchen",
                     "doneBy": "Contractor",
@@ -67,12 +71,13 @@
             },
             "damage": [
                 {
-                    "location": "kitchen",
+                    "id": 1,
+                    "location": "Kitchen",
                     "new": true,
                     "type": "wear",
                     "date": "2024-11-07",
                     "urgent": false,
-                    "description": "Some handles for the kitchen drawers are loose.",
+                    "description": "Second to left drawer does not open properly. Rails is probably worn out.",
                     "photos": []
                 }
             ],
@@ -94,6 +99,7 @@
             "damage": [],
             "maintenance": [
                 {
+                    "id": 1,
                     "location": "bathroom",
                     "type": "piping",
                     "urgent": true,
@@ -118,7 +124,8 @@
             "damage": [],
             "maintenance": [
                 {
-                    "location": "balcony",
+                    "id": 1,
+                    "location": "Balcony door",
                     "type": "woodrot",
                     "urgent": false,
                     "costIndication": "0-500",
@@ -141,7 +148,8 @@
             },
             "damage": [
                 {
-                    "location": "living room",
+                    "id": 1,
+                    "location": "Livingroom",
                     "new": true,
                     "type": "other",
                     "date": "2024-12-07",
@@ -168,7 +176,8 @@
             "damage": [],
             "maintenance": [
                 {
-                    "location": "hall",
+                    "id": 1,
+                    "location": "Hall",
                     "type": "security",
                     "urgent": true,
                     "costIndication": "0-500",
