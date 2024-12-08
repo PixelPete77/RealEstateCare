@@ -1,12 +1,13 @@
 <script setup>
-    import { IonButton, IonContent, IonPage } from '@ionic/vue';
+    import { IonContent, IonPage } from '@ionic/vue';
 </script>
 
 <template>
     <ion-page>
         <ion-content>
-            <h1>Help</h1>
-            
+            <div class="wrapper">
+                <h1>Help</h1>
+            </div>
         </ion-content>
     </ion-page>
 </template>
