@@ -128,7 +128,7 @@ fieldset legend {
   padding: 0;
 }
 
-:is(a, ion-datetime-button, ion-input, ion-select, ion-textarea) {
+fieldset :is(a, ion-datetime-button, ion-input, ion-select, ion-textarea) {
   margin-block-end: 1.5rem;
 }
 

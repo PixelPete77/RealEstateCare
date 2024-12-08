@@ -1,5 +1,5 @@
 <script setup>
-    import { computed } from 'vue';
+    import { computed, onMounted } from 'vue';
     import { RouterLink, useRoute } from 'vue-router';
     import { useInspectionsStore } from '@/components/stores/inspectionsStore';
     import { 
@@ -19,8 +19,17 @@
     const route = useRoute();
     const store = useInspectionsStore();
 
+    // Get the inspection data based on the id
     const inspection = computed(() => {
         return store.getInspectionById(route.params.id);
+    });
+
+    // Check if inspection data is present when the component is mounted
+    onMounted(() => {
+        console.log("Inspections? ", store.inspections.length);
+        if (!store.inspections.length) {
+            store.fetchInspections();
+        } 
     });
 </script>
 
@@ -28,16 +37,24 @@
     <ion-page>
         <ion-content>
             <div class="wrapper">
-                <h1>Inspection #{{ inspection.id }}</h1>
-                <p>Date: {{ inspection.date }}</p>
-                <p>Address:<br>
-                    Street: {{ inspection.address.street }}<br>
-                    City: {{ inspection.address.city }}<br>
-                    Province: {{ inspection.address.province }}<br>
-                    Zip code: {{ inspection.address.zipCode }}
-                </p>
-                <h2></h2>
-                <form>
+                <h1>Inspection #{{ route.params.id }}</h1>
+                <div v-if="!store.inspections.length">
+                    <p>Loading inspection...</p>
+                </div>
+                <div v-if="inspection">
+                    <p>
+                        <strong>Date:</strong><br>
+                        {{ inspection.date }}
+                    </p>
+                    <p>
+                        <strong>Address:</strong><br>
+                        Street: {{ inspection.address.street }}<br>
+                        City: {{ inspection.address.city }}<br>
+                        Province: {{ inspection.address.province }}<br>
+                        Zip code: {{ inspection.address.zipCode }}
+                    </p>
+                </div>
+                <form v-if="inspection">
                     <fieldset>
                         <legend>Record damage</legend>
                         <ion-label>Date:</ion-label>
@@ -57,7 +74,7 @@
                         <!-- TODO: add option to add photo's -->
 
                         <ion-modal :keep-contents-mounted="true">
-                            <ion-datetime id="datetime" presentation="date"></ion-datetime>
+                            <ion-datetime id="datetime" presentation="date" :value="inspection.damage.date"></ion-datetime>
                         </ion-modal>
                     </fieldset>
                     <fieldset>
@@ -89,7 +106,7 @@
                         </ion-select>
                         <ion-input label="Reported outages" label-placement="stacked" fill="outline" placeholder="Enter reported outages"></ion-input>
                         <ion-label>Link to test procedure:</ion-label>
-                        <router-link :to="link">
+                        <router-link to="">
                             PDF document
                         </router-link>
                         <ion-textarea label="Comments" label-placement="stacked" fill="outline" placeholder="Enter a comment"></ion-textarea>
@@ -98,7 +115,7 @@
                     <fieldset>
                         <legend>Inventory modifications</legend>
                         <ion-label>Existing situation and already documented modifications:</ion-label>
-                        <router-link :to="link">
+                        <router-link to="">
                             PDF document
                         </router-link>
                         <ion-input label="Location of modification found" label-placement="stacked" fill="outline" placeholder="Enter the location"></ion-input>
@@ -126,6 +143,23 @@
 </template>
 
 <style scoped>
+    h1 ~ div {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-block-end: 2rem;
+    }
+
+    @media screen and (min-width: 30rem) {
+        h1 ~ div {
+            flex-direction: row;
+        }
+    }
+
+    h1 ~ div p {
+        flex: 1 1 auto;
+    }
+
     form {
         display: flex;
         flex-direction: column;
