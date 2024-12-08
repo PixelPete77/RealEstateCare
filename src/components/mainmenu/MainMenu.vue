@@ -8,16 +8,16 @@
     <ion-toolbar color="primary">
         <nav id="main-menu">
             <ul>
-                <MainMenuItem link="scheduled" text="Scheduled inspections">
+                <MainMenuItem link="/scheduled" text="Scheduled inspections">
                     <ScheduledIcon />
                 </MainMenuItem>
-                <MainMenuItem link="completed" text="Completed inspections">
+                <MainMenuItem link="/completed" text="Completed inspections">
                     <CompletedIcon />
                 </MainMenuItem>
-                <MainMenuItem link="knowledge-base" text="Knowledge base">
+                <MainMenuItem link="/knowledge-base" text="Knowledge base">
                     <KnowledgeBaseIcon />
                 </MainMenuItem>
-                <MainMenuItem link="help" text="Help">
+                <MainMenuItem link="/help" text="Help">
                     <HelpIcon />
                 </MainMenuItem>
             </ul>
