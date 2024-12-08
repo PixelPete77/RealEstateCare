@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 const url = 'https://my-json-server.typicode.com/PixelPete77/RealEstateCare/inspections';
+// const url = 'https://my-json-server.typicode.com/PixelPete77/RealEstateCare/inspections?inspectorId=1';
 
 export const useInspectionsStore = defineStore('inspections', {
     state: () => {
@@ -31,6 +32,8 @@ export const useInspectionsStore = defineStore('inspections', {
         }
     },
     getters: {
-        
-    }
+        getInspectionById: (state) => (id) => {
+            return state.inspections.find((inspection) => inspection.id === parseInt(id));
+        },
+    },
 })

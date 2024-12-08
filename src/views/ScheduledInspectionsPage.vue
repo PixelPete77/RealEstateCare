@@ -1,8 +1,8 @@
 <script setup>
     import { computed, onMounted } from 'vue';
     import { IonContent, IonPage } from '@ionic/vue';
-    import InspectionListItem from '@/components/inspection/InspectionListItem.vue';
     import { useInspectionsStore } from '@/components/stores/inspectionsStore';
+    import InspectionListItem from '@/components/inspection/InspectionListItem.vue';
 
     const store = useInspectionsStore();
 
