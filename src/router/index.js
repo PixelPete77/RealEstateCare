@@ -24,6 +24,12 @@ const routes = [
     meta: { layout: 'default', title: 'Dashboard' },
   },
   {
+    path: '/inspection/:id',
+    name: 'inspection',
+    component: () => import('@/views/InspectionPage.vue'),
+    meta: { layout: 'default', title: 'Inspection' },
+  },
+  {
     path: '/knowledge-base',
     name: 'Knowledge base',
     component: () => import('@/views/KnowledgeBasePage.vue'),

@@ -1,5 +1,6 @@
 <script setup>
     import { computed } from 'vue';
+    import router from '@/router';
     import { IonButton } from '@ionic/vue';
     import ArrowRightIcon from '@/components/icons/ArrowRightIcon.vue';
 
@@ -9,11 +10,22 @@
         date: { type: String, required: true }
     });
 
+    // Computed properties
     const formattedDate = computed(() => {
         // Change received JSON date format to dd/mm/yyyy
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
         return new Date(props.date).toLocaleDateString('en-GB', options);
     })
+
+    // Methods
+    const goToInspection = (id) => {
+        router.push({
+            name: 'inspection',
+            params: {
+                id: id
+            }
+        });
+    }
 </script>
 
 <template>
@@ -31,7 +43,7 @@
                 {{ address.street }}, {{ address.city }}, {{ address.zipCode }}, {{ address.province }}
             </p>
         </div>
-        <ion-button>
+        <ion-button @click="goToInspection(id)">
             Go to inspection
             <ArrowRightIcon slot="end" />
         </ion-button>
@@ -86,5 +98,6 @@
     ion-button :deep(svg) {
         inline-size: 1rem;
         block-size: auto;
+        margin-inline-start: .125em;
     }
 </style>
