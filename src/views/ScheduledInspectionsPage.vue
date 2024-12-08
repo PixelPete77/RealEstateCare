@@ -6,15 +6,14 @@
 
     const store = useInspectionsStore();
 
+    // --- Lifecycle hooks -----------------------------
+
     // Fetch the inspections when the component is mounted
     onMounted(() => {
         store.fetchInspections()
     })
 
-    // Computed properties
-    const inspections = computed(() => {
-        return store.inspections;
-    })
+    // --- Computed properties -------------------------
 
     const sortedInspections = computed(() => {
         return store.inspections.slice().sort((a, b) => {
