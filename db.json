@@ -27,7 +27,7 @@
                     "location": "balcony",
                     "type": "painting",
                     "urgent": false,
-                    "costIndication": "500 - 1000",
+                    "costIndication": "500-1000",
                     "photos": []
                 }
             ],
@@ -97,7 +97,7 @@
                     "location": "bathroom",
                     "type": "piping",
                     "urgent": true,
-                    "costIndication": "0 - 500",
+                    "costIndication": "0-500",
                     "photos": []
                 }
             ],
@@ -119,9 +119,9 @@
             "maintenance": [
                 {
                     "location": "balcony",
-                    "type": "wood rot",
+                    "type": "woodrot",
                     "urgent": false,
-                    "costIndication": "0 - 500",
+                    "costIndication": "0-500",
                     "photos": []
                 }
             ],
@@ -171,7 +171,7 @@
                     "location": "hall",
                     "type": "security",
                     "urgent": true,
-                    "costIndication": "0 - 500",
+                    "costIndication": "0-500",
                     "photos": []
                 }
             ],

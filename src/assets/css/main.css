@@ -113,6 +113,34 @@ ion-content.arc-bg {
 }
 
 
+fieldset {
+  inline-size: 100%;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 0;
+}
+
+fieldset legend {
+  font-size: 1.5rem;
+  margin-block-end: 1.5rem;
+  padding: 0;
+}
+
+:is(a, ion-datetime-button, ion-input, ion-select, ion-textarea) {
+  margin-block-end: 1.5rem;
+}
+
+ion-checkbox {
+  margin-block-end: .5rem;
+}
+
+ion-datetime-button {
+  justify-content: start;
+}
+
+
 /* Utility */
 
 .sr-only {
