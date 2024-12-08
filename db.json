@@ -3,8 +3,8 @@
         {
             "id": 1,
             "inspectorId": 1,
-            "date": "2024-12-05",
-            "completedDate": "2024-12-07",
+            "date": "2024-11-05",
+            "completedDate": "2024-11-07",
             "address": {
                 "street": "59 Nevern Square",
                 "city": "Earls Court",
@@ -16,7 +16,7 @@
                     "location": "kitchen",
                     "new": true,
                     "type": "wear",
-                    "date": "2024-12-07",
+                    "date": "2024-11-07",
                     "urgent": false,
                     "description": "Some handles for the kitchen drawers are loose.",
                     "photos": []
@@ -57,8 +57,8 @@
         {
             "id": 2,
             "inspectorId": 1,
-            "date": "2024-12-07",
-            "completedDate": "2024-12-08",
+            "date": "2024-11-07",
+            "completedDate": "2024-11-08",
             "address": {
                 "street": "23 Francis Street",
                 "city": "Westminster",
@@ -70,7 +70,7 @@
                     "location": "kitchen",
                     "new": true,
                     "type": "wear",
-                    "date": "2024-12-07",
+                    "date": "2024-11-07",
                     "urgent": false,
                     "description": "Some handles for the kitchen drawers are loose.",
                     "photos": []
@@ -79,13 +79,12 @@
             "maintenance": [],
             "installations": [],
             "modifications": []
-        }
-        ,
+        },
         {
             "id": 3,
             "inspectorId": 2,
-            "date": "2024-12-06",
-            "completedDate": "2024-12-08",
+            "date": "2024-11-06",
+            "completedDate": "2024-11-08",
             "address": {
                 "street": "7-9 Montpelier Vale",
                 "city": "Blackheath",
@@ -97,6 +96,80 @@
                 {
                     "location": "bathroom",
                     "type": "piping",
+                    "urgent": true,
+                    "costIndication": "0 - 500",
+                    "photos": []
+                }
+            ],
+            "installations": [],
+            "modifications": []
+        },
+        {
+            "id": 101,
+            "inspectorId": 1,
+            "date": "2024-12-08",
+            "completedDate": null,
+            "address": {
+                "street": "402 King's Road",
+                "city": "Chelsea",
+                "province": "London",
+                "zipCode": "SW10 0LJ"
+            },
+            "damage": [],
+            "maintenance": [
+                {
+                    "location": "balcony",
+                    "type": "wood rot",
+                    "urgent": false,
+                    "costIndication": "0 - 500",
+                    "photos": []
+                }
+            ],
+            "installations": [],
+            "modifications": []
+        },
+        {
+            "id": 102,
+            "inspectorId": 2,
+            "date": "2024-12-09",
+            "completedDate": null,
+            "address": {
+                "street": "1 Cabot Square",
+                "city": "Canary Wharf",
+                "province": "E14 4QJ",
+                "zipCode": "SE3 0TA"
+            },
+            "damage": [
+                {
+                    "location": "living room",
+                    "new": true,
+                    "type": "other",
+                    "date": "2024-12-07",
+                    "urgent": false,
+                    "description": "A small tear has formed in the ceiling.",
+                    "photos": []
+                }
+            ],
+            "maintenance": [],
+            "installations": [],
+            "modifications": []
+        },
+        {
+            "id": 103,
+            "inspectorId": 3,
+            "date": "2024-12-10",
+            "completedDate": null,
+            "address": {
+                "street": "194b Chamberlayne Rd",
+                "city": "Kensal Green",
+                "province": "London",
+                "zipCode": "NW10 3JU"
+            },
+            "damage": [],
+            "maintenance": [
+                {
+                    "location": "hall",
+                    "type": "security",
                     "urgent": true,
                     "costIndication": "0 - 500",
                     "photos": []
