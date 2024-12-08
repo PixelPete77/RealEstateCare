@@ -112,6 +112,9 @@ ion-content.arc-bg {
   /* Use Ionics calculated offset to 'undo' the offset, so the background images don't partially disappear behind the header and footer component */
 }
 
+form h2 {
+  margin-block-end: 0;
+}
 
 fieldset {
   inline-size: 100%;
@@ -122,9 +125,13 @@ fieldset {
   padding: 0;
 }
 
+fieldset ~ h2 {
+  margin-block-start: 2rem;
+}
+
 fieldset legend {
-  font-size: 1.5rem;
-  margin-block-end: 1.5rem;
+  font-size: 1.25rem;
+  margin-block-end: 1rem;
   padding: 0;
 }
 
