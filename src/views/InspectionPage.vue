@@ -2,6 +2,7 @@
     import { computed, onMounted } from 'vue';
     import { RouterLink, useRoute } from 'vue-router';
     import { useInspectionsStore } from '@/components/stores/inspectionsStore';
+    import loaderAnim from '@/components/loader/loaderAnim.vue';
     import { 
         IonButton,
         IonCheckbox, 
@@ -19,16 +20,22 @@
     const route = useRoute();
     const store = useInspectionsStore();
 
-    // Get the inspection data based on the id
-    const inspection = computed(() => {
-        return store.getInspectionById(route.params.id);
-    });
+    
+    
+    // --- Lifecycle hooks -----------------------------
 
     // Check if inspection data is present when the component is mounted
     onMounted(() => {
         if (!store.inspections.length) {
             store.fetchInspections();
         } 
+    });
+
+    // --- Computed properties -------------------------
+
+    // Get the inspection data based on the id
+    const inspection = computed(() => {
+        return store.getInspectionById(route.params.id);
     });
 </script>
 
@@ -38,11 +45,12 @@
             <div class="wrapper">
                 <h1>Inspection #{{ route.params.id }}</h1>
                 <!-- Show loading indicator when fetching data -->
-                <div v-if="!store.inspections.length">
-                    <p>Loading inspection...</p>
+                <div class="loader" v-if="!store.inspections.length">
+                    <loaderAnim />
+                    <p>Loading inspection</p>
                 </div>
                 <!-- Inspection data -->
-                <div v-if="inspection">
+                <div class="info" v-if="inspection">
                     <p>
                         <strong>Date:</strong><br>
                         {{ inspection.date }}
@@ -148,7 +156,14 @@
 </template>
 
 <style scoped>
-    h1 ~ div {
+    .loader {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .info {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
@@ -156,12 +171,12 @@
     }
 
     @media screen and (min-width: 30rem) {
-        h1 ~ div {
+        .info {
             flex-direction: row;
         }
     }
 
-    h1 ~ div p {
+    .info p {
         flex: 1 1 auto;
     }
 
