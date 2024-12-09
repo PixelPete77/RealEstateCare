@@ -40,6 +40,12 @@
 
     // Format the inspection date
     const formattedDate = computed(() => formatDate(inspection.value.date));
+
+    // Format the date the inspection was completed, if not null
+    const formattedCompletedDate = computed(() => {
+        const date = inspection.value?.completedDate;
+        return formatDate(date);
+    });
 </script>
 
 <template>
@@ -52,11 +58,16 @@
                     <loaderAnim />
                     <p>Loading inspection</p>
                 </div>
-                <!-- Inspection data -->
+                <!-- Show inspection data when available -->
                 <div class="info" v-if="inspection">
                     <p>
                         <strong>Date:</strong><br>
-                        {{ formattedDate  }}
+                        {{ formattedDate  }}<br>
+                        <br>
+                        <template v-if="inspection.completedDate">
+                            <strong>Completed on:</strong><br>
+                            {{ formattedCompletedDate  }}
+                        </template>
                     </p>
                     <p>
                         <strong>Address:</strong><br>
