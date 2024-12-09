@@ -16,11 +16,11 @@
         IonSelect, 
         IonSelectOption, 
         IonTextarea } from '@ionic/vue';
+    import { formatDate } from '@/composables/formatDate';
 
     const route = useRoute();
     const store = useInspectionsStore();
 
-    
     
     // --- Lifecycle hooks -----------------------------
 
@@ -37,6 +37,9 @@
     const inspection = computed(() => {
         return store.getInspectionById(route.params.id);
     });
+
+    // Format the inspection date
+    const formattedDate = computed(() => formatDate(inspection.value.date));
 </script>
 
 <template>
@@ -53,7 +56,7 @@
                 <div class="info" v-if="inspection">
                     <p>
                         <strong>Date:</strong><br>
-                        {{ inspection.date }}
+                        {{ formattedDate  }}
                     </p>
                     <p>
                         <strong>Address:</strong><br>
@@ -104,6 +107,7 @@
                             <ion-select-option value="1500+">1.500+</ion-select-option>
                         </ion-select>
                         <ion-checkbox label-placement="end" :checked="mntnc.urgent">Urgent action required</ion-checkbox>
+                        <!-- TODO: add option to add photo's -->
                     </fieldset>
                     <h2>Inspect technical installations</h2>
                     <fieldset v-for="instal in inspection.installations" :key="instal.id">
@@ -118,15 +122,18 @@
                         </ion-select>
                         <ion-input label="Reported outages" label-placement="stacked" fill="outline" placeholder="Enter reported outages" :value="instal.fault"></ion-input>
                         <ion-label>Link to test procedure:</ion-label>
+                        <!-- TODO: add link to PDF doc -->
                         <router-link to="">
                             PDF document
                         </router-link>
                         <ion-textarea label="Comments" label-placement="stacked" fill="outline" placeholder="Enter a comment" :value="instal.comments"></ion-textarea>
                         <ion-checkbox label-placement="end" :checked="inspection.installations.approved" :value="instal.approved">Approved</ion-checkbox>
+                        <!-- TODO: add option to add photo's -->
                     </fieldset>
                     <h2>Inventory modifications</h2>
                     <fieldset v-for="mod in inspection.modifications" :key="mod.id">
                         <legend>Modification {{ mod.id }}</legend>
+                        <!-- TODO: add link to PDF doc -->
                         <ion-label>Existing situation and already documented modifications:</ion-label>
                         <router-link to="">
                             PDF document
@@ -145,6 +152,7 @@
                             <ion-select-option value="adjust">Have it adjusted and inspected</ion-select-option>
                         </ion-select>
                         <ion-textarea label="Comments" label-placement="stacked" fill="outline" placeholder="Enter a comment" :value="mod.comments"></ion-textarea>
+                        <!-- TODO: add option to add photo's -->
                     </fieldset>
                     <ion-button>
                         Save inspection
@@ -156,13 +164,6 @@
 </template>
 
 <style scoped>
-    .loader {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: .5rem;
-    }
-
     .info {
         display: flex;
         flex-direction: column;
