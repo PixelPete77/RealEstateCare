@@ -52,6 +52,10 @@
     <ion-page>
         <ion-content>
             <div class="wrapper">
+                <!-- TODO: dynamically change link based on where you came from (scheduled / completed) -->
+                <router-link to="/scheduled">
+                    Back to scheduled inspections
+                </router-link>
                 <h1>Inspection #{{ route.params.id }}</h1>
                 <!-- Show loading indicator when fetching data -->
                 <div class="loader" v-if="!store.inspections.length">
