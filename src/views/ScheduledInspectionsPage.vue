@@ -3,6 +3,7 @@
     import { IonContent, IonPage } from '@ionic/vue';
     import { useInspectionsStore } from '@/components/stores/inspectionsStore';
     import InspectionListItem from '@/components/inspection/InspectionListItem.vue';
+    import loaderAnim from '@/components/loader/loaderAnim.vue';
 
     const store = useInspectionsStore();
 
@@ -39,9 +40,9 @@
             <div class="wrapper">
                 <h1>Scheduled inspections</h1>
                 <!-- Show loading indicator when status = loading -->
-                <div v-if="loading">
-                    <h2 style="margin: 0 auto;">Loading...</h2>
-                    
+                <div class="loader" v-if="loading">
+                    <loaderAnim />
+                    <p>Loading inspections</p>  
                 </div>
 
                 <!-- Show the error when loading inpections failed -->
