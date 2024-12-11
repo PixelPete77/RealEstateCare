@@ -25,17 +25,17 @@
 </script>
 
 <template>
-    <li>
+    <li class="insp-list-item">
         <div>
-            <h2>
+            <h2 class="insp-list-item-title">
                 Inspection #{{ id }}
             </h2>
             <p>
-                <span>Date:</span>
+                <span class="insp-list-item-label">Date:</span>
                 {{ formattedDate }}
             </p>
             <p>
-                <span>Address:</span>
+                <span class="insp-list-item-label">Address:</span>
                 {{ address.street }}, {{ address.city }}, {{ address.zipCode }}, {{ address.province }}
             </p>
         </div>
@@ -47,7 +47,7 @@
 </template>
 
 <style scoped>
-    li {
+    .insp-list-item {
         border-bottom: 1px solid hsl(0, 0%, 50%);
         display: flex;
         flex-direction: column;
@@ -56,13 +56,13 @@
     }
 
     @media screen and (min-width: 30rem) {
-        li {
+        .insp-list-item {
             flex-direction: row;
             align-items: end;
         }
     }
 
-    div {
+    .insp-list-item > div {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
@@ -70,19 +70,19 @@
     }
 
     @media screen and (min-width: 48rem) {
-        div {
+        .insp-list-item > div {
             flex-direction: row;
             flex-wrap: wrap;
             gap: 1rem;
         }
     }
 
-    h2 {
+    .insp-list-item-title {
         flex: 1 1 100%;
         margin-block-end: 0;
     }
 
-    span {
+    .insp-list-item-label {
         display: block;
         opacity: .67;
     }

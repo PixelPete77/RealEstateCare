@@ -26,12 +26,12 @@
 </template>
 
 <style scoped>
-    nav {
+    #main-menu {
         display: flex;
         margin-inline: auto;
         max-inline-size: 42rem;
     }
-    ul {
+    #main-menu > ul {
         display: contents;
         list-style: none;
     }

@@ -14,8 +14,8 @@
 </script>
 
 <template>
-    <li>
-        <router-link :to="link">
+    <li class="main-menu-item">
+        <router-link :to="link" class="main-menu-link">
             <slot></slot>
             {{ text }}
         </router-link>
@@ -23,11 +23,11 @@
 </template>
 
 <style scoped>
-    li {
+    .main-menu-item {
         flex: 1 1 0%;
     }
 
-    a {
+    .main-menu-link {
         block-size: 100%;
         position: relative;
         color: #fff;
@@ -41,7 +41,7 @@
         text-decoration: none;
     }
 
-    a::after {
+    .main-menu-link::after {
         position: absolute;
         left: calc(50% - 5px);
         bottom: -6px;
@@ -54,7 +54,7 @@
         transform-origin: center;
     }
 
-    a.router-link-active::after {
+    .main-menu-link.router-link-active::after {
         transform: rotate(45deg) translateY(0);
     }
 
@@ -65,7 +65,7 @@
         transition: opacity .2s ease;
     }
 
-    a.router-link-active :deep(svg) {
+    .main-menu-link.router-link-active :deep(svg) {
         opacity: 1;
     }
 </style>
