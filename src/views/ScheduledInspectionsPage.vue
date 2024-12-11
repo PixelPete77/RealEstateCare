@@ -7,13 +7,6 @@
 
     const store = useInspectionsStore();
 
-    // --- Lifecycle hooks -----------------------------
-
-    // Fetch the inspections when the component is mounted
-    onMounted(() => {
-        store.fetchInspections()
-    })
-
     // --- Computed properties -------------------------
 
     const sortedInspections = computed(() => {
@@ -28,6 +21,13 @@
 
     const loading = computed(() => {
         return store.loadingStatus === 'loading';
+    })
+  
+    // --- Events --------------------------------------
+
+    // Fetch the inspections when the component is mounted
+    onMounted(() => {
+        store.fetchInspections()
     })
 
     // Methods

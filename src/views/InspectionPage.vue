@@ -21,15 +21,6 @@
     const route = useRoute();
     const store = useInspectionsStore();
 
-    
-    // --- Lifecycle hooks -----------------------------
-
-    // Check if inspection data is present when the component is mounted
-    onMounted(() => {
-        if (!store.inspections.length) {
-            store.fetchInspections();
-        } 
-    });
 
     // --- Computed properties -------------------------
 
@@ -45,6 +36,16 @@
     const formattedCompletedDate = computed(() => {
         const date = inspection.value?.completedDate;
         return formatDate(date);
+    });
+    
+    
+    // --- Events --------------------------------------
+
+    // Check if inspection data is present when the component is mounted
+    onMounted(() => {
+        if (!store.inspections.length) {
+            store.fetchInspections();
+        } 
     });
 </script>
 

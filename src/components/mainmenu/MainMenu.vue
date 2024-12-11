@@ -1,5 +1,5 @@
 <script setup>
-    import { IonFooter, IonToolbar } from '@ionic/vue';
+    import { IonToolbar } from '@ionic/vue';
     import MainMenuItem from './MainMenuItem.vue';
     import { CompletedIcon, HelpIcon, KnowledgeBaseIcon, ScheduledIcon } from '@/components/icons/'
 </script>
