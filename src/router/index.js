@@ -57,7 +57,7 @@ const routes = [
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('@/views/NotFoundPage.vue'),
-    meta: { layout: 'login' },
+    meta: { layout: 'login', title: 'Page not found' },
   },
 ];
 
