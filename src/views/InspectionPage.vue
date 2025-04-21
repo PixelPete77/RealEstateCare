@@ -33,10 +33,7 @@
     const formattedDate = computed(() => formatDate(inspection.value.date));
 
     // Format the date the inspection was completed, if not null
-    const formattedCompletedDate = computed(() => {
-        const date = inspection.value?.completedDate;
-        return formatDate(date);
-    });
+    const formattedCompletedDate = computed(() => formatDate(inspection.value?.completedDate));
     
     
     // --- Events --------------------------------------
@@ -185,25 +182,22 @@
         flex-direction: column;
         gap: 1.5rem;
         margin-block-end: 2rem;
-    }
-
-    @media screen and (min-width: 30rem) {
-        .info {
+    
+        @media screen and (min-width: 30rem) {
             flex-direction: row;
         }
-    }
-
-    .info p {
-        flex: 1 1 auto;
+    
+        & p {
+            flex: 1 1 auto;
+        }
     }
 
     form {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-    }
-    @media screen and (min-width: 30rem) {
-        form {
+
+        @media screen and (min-width: 30rem) {
             align-items: start;
         }
     }
