@@ -83,10 +83,8 @@ h1 {
   margin-block-end: 1.5em;
   text-align: center;
   text-shadow: 0 0 1rem #fff;
-}
 
-@media (prefers-color-scheme: dark) {
-  h1 {
+  @media (prefers-color-scheme: dark) {
     text-shadow: 0 0 1rem var(--ion-color-dark);
   }
 }
@@ -123,21 +121,22 @@ fieldset {
   flex-direction: column;
   align-items: start;
   padding: 0;
+
+  & ~ h2 {
+    margin-block-start: 2rem;
+  }
+  
+  & legend {
+    font-size: 1.25rem;
+    margin-block-end: 1rem;
+    padding: 0;
+  }
+  
+  & :is(a, ion-datetime-button, ion-input, ion-select, ion-textarea) {
+    margin-block-end: 1.5rem;
+  }
 }
 
-fieldset ~ h2 {
-  margin-block-start: 2rem;
-}
-
-fieldset legend {
-  font-size: 1.25rem;
-  margin-block-end: 1rem;
-  padding: 0;
-}
-
-fieldset :is(a, ion-datetime-button, ion-input, ion-select, ion-textarea) {
-  margin-block-end: 1.5rem;
-}
 
 ion-checkbox {
   margin-block-end: .5rem;

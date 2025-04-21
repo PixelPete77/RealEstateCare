@@ -53,27 +53,23 @@
         flex-direction: column;
         gap: 1rem;
         padding-block-end: 1.5rem;
-    }
 
-    @media screen and (min-width: 30rem) {
-        .insp-list-item {
+        @media screen and (min-width: 30rem) {
             flex-direction: row;
             align-items: end;
         }
-    }
+        
+        & > div {
+            flex: 1 1 auto;
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
 
-    .insp-list-item > div {
-        flex: 1 1 auto;
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-    }
-
-    @media screen and (min-width: 48rem) {
-        .insp-list-item > div {
-            flex-direction: row;
-            flex-wrap: wrap;
-            gap: 1rem;
+            @media screen and (min-width: 48rem) {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
         }
     }
 

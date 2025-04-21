@@ -46,15 +46,13 @@
         padding: 1rem;
         text-align: center;
         text-decoration: none;
-    }
 
-    @media (prefers-color-scheme: dark) {
-        .dashboard-card {
+        @media (prefers-color-scheme: dark) {
             --dashboard-bg: rgb(41 52 57 / .85);
             --dashboard-shadow-color: 0deg 0% 0%;
         }
     }
-    
+
     :deep(svg) {
         inline-size: 5rem;
         stroke: var(--dashboard-card-icon-color);

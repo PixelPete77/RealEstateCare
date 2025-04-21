@@ -39,23 +39,24 @@
         padding: .5rem;
         text-align: center;
         text-decoration: none;
-    }
 
-    .main-menu-link::after {
-        position: absolute;
-        left: calc(50% - 5px);
-        bottom: -6px;
-        inline-size: 10px;
-        block-size: 10px;
-        background-color: currentColor;
-        content: '';
-        transform: rotate(45deg) translateY(100%);
-        transition: transform .2s ease;
-        transform-origin: center;
-    }
+        &::after {
+            position: absolute;
+            left: calc(50% - 5px);
+            bottom: -6px;
+            inline-size: 10px;
+            block-size: 10px;
+            background-color: currentColor;
+            content: '';
+            rotate: 45deg;
+            translate: 0 100%;
+            transition: translate .2s ease;
+            transform-origin: center;
+        }
 
-    .main-menu-link.router-link-active::after {
-        transform: rotate(45deg) translateY(0);
+        &.router-link-active::after {
+            translate: 0 0;
+        }
     }
 
     :deep(svg) {

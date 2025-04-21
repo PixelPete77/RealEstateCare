@@ -30,9 +30,10 @@
         display: flex;
         margin-inline: auto;
         max-inline-size: 42rem;
-    }
-    #main-menu > ul {
-        display: contents;
-        list-style: none;
+
+        & > ul {
+            display: contents;
+            list-style: none;
+        }
     }
 </style>
