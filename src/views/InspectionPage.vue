@@ -1,7 +1,7 @@
 <script setup>
     import { computed, onMounted } from 'vue';
     import { RouterLink, useRoute } from 'vue-router';
-    import { useInspectionsStore } from '@/components/stores/inspectionsStore';
+    import { useInspectionsStore } from '@/stores/inspectionsStore';
     import loaderAnim from '@/components/loader/loaderAnim.vue';
     import { 
         IonButton,

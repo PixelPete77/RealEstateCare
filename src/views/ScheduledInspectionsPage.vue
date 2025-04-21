@@ -1,7 +1,7 @@
 <script setup>
     import { computed, onMounted } from 'vue';
     import { IonContent, IonPage } from '@ionic/vue';
-    import { useInspectionsStore } from '@/components/stores/inspectionsStore';
+    import { useInspectionsStore } from '@/stores/inspectionsStore';
     import InspectionListItem from '@/components/inspection/InspectionListItem.vue';
     import loaderAnim from '@/components/loader/loaderAnim.vue';
 
