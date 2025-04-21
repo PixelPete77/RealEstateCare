@@ -19,14 +19,13 @@
     import { formatDate } from '@/composables/formatDate';
 
     const route = useRoute();
-    const store = useInspectionsStore();
-
+    const inspectionsStore = useInspectionsStore();
 
     // --- Computed properties -------------------------
 
     // Get the inspection data based on the id
     const inspection = computed(() => {
-        return store.getInspectionById(route.params.id);
+        return inspectionsStore.getInspectionById(route.params.id);
     });
 
     // Format the inspection date
@@ -40,8 +39,8 @@
 
     // Check if inspection data is present when the component is mounted
     onMounted(() => {
-        if (!store.inspections.length) {
-            store.fetchInspections();
+        if (!inspectionsStore.inspections.length) {
+            inspectionsStore.fetchInspectionsData();
         } 
     });
 </script>
@@ -56,7 +55,7 @@
                 </router-link>
                 <h1>Inspection #{{ route.params.id }}</h1>
                 <!-- Show loading indicator when fetching data -->
-                <div class="loader" v-if="!store.inspections.length">
+                <div class="loader" v-if="!inspectionsStore.inspections.length">
                     <loaderAnim />
                     <p>Loading inspection</p>
                 </div>
