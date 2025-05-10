@@ -5,29 +5,29 @@
     import InspectionListItem from '@/components/inspection/InspectionListItem.vue';
     import loaderAnim from '@/components/loader/loaderAnim.vue';
 
-    const inspectionsStore = useInspectionsStore();
+    const inspections = useInspectionsStore();
 
     // --- Computed properties -------------------------
 
     const sortedInspections = computed(() => {
-        return inspectionsStore.inspections.slice().sort((a, b) => {
+        return inspections.inspections.slice().sort((a, b) => {
             return new Date(a.date) - new Date(b.date); // Sort the inspections by decending date
         });
     });
 
     const error = computed(() => {
-        return inspectionsStore.errors;
+        return inspections.errors;
     })
 
     const loading = computed(() => {
-        return inspectionsStore.loadingStatus === 'loading';
+        return inspections.loadingStatus === 'loading';
     })
   
     // --- Events --------------------------------------
 
     // Fetch the inspections when the component is mounted
     onMounted(() => {
-        inspectionsStore.fetchInspectionsData()
+        inspections.fetchInspectionsData()
     })
 
     // Methods

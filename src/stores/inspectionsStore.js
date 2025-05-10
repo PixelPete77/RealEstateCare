@@ -26,6 +26,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
         return inspections.value.find(inspection => inspection.id === parseInt(id));
     }
 
+    // Make the state, actions and getters available to other components
     return {
         errors,
         inspections,
