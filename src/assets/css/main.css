@@ -95,19 +95,8 @@ h1 {
   backdrop-filter: blur(5px);
   max-inline-size: 70rem;
   margin-inline: auto;
-  padding: 1.5rem .5rem 3rem;
+  padding-block: 1.5rem 3rem;
   padding-inline: clamp(0.5rem, -0.56rem + 4vw, 2rem);
-}
-
-
-ion-content ion-content {
-  --background: transparent;
-}
-
-ion-content.arc-bg {
-  --background: -2px var(--offset-top)/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
-                calc(100% + 2px) calc(100% - var(--offset-bottom))/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
-  /* Use Ionics calculated offset to 'undo' the offset, so the background images don't partially disappear behind the header and footer component */
 }
 
 form h2 {
@@ -138,8 +127,33 @@ fieldset {
 }
 
 
+/* ----- Ionic components style override and additions ----- */
+
+ion-button {
+  --padding-top: .75rem;
+  --padding-bottom: .75rem;
+  --padding-start: 1rem;
+  --padding-end: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 ion-checkbox {
   margin-block-end: .5rem;
+}
+
+ion-content ion-content {
+  --background: transparent;
+}
+
+ion-content.arc-bg {
+  --background: -2px var(--offset-top)/min(75%, 640px) no-repeat url('../images/REC-arcs-top.svg'), 
+                calc(100% + 2px) calc(100% - var(--offset-bottom))/min(56%, 480px) no-repeat url('../images/REC-arcs-bottom.svg');
+  /* Use Ionics calculated offset to 'undo' the offset, so the background images don't partially disappear behind the header and footer component */
+}
+
+:host(.checkbox-label-placement-end) .label-text-wrapper {
+  margin-inline: .75rem 0;
 }
 
 ion-datetime-button {
@@ -147,7 +161,7 @@ ion-datetime-button {
 }
 
 
-/* Utility */
+/* ----- Utility ----- */
 
 .loader {
   display: flex;
