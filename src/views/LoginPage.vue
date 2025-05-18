@@ -1,13 +1,14 @@
 <script setup>
     import { ref } from 'vue';
     import { useAuthStore } from '@/stores/authStore';
-    import { IonButton, IonContent, IonInput, IonPage } from '@ionic/vue';
+    import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue';
     import { EyeIcon, EyeOffIcon } from '@/components/icons';
 
     const auth = useAuthStore();
-    const username = ref('');
     const password = ref('');
     const passwordVisible = ref('false');
+    const usernameInput = ref(null);
+    const username = ref('');
 
     const handleLogin = async () => {
         try {
@@ -23,28 +24,33 @@
         passwordVisible.value = !passwordVisible.value;
     }
 
-    // const validateEmail = (email) => {
-    //     return email.match(
-    //       /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-    //     );
-    // }
+    // Check if the entered username input is a valid email address
+    // Based on an example in the Ionic documentation: https://ionicframework.com/docs/api/input#helper--error-text
+    const validateEmail = (email) => {
+        return email.match(
+          /^(?=.{1,254}$)(?=.{1,64}@)[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+        );
+    }
  
-    // const validate = (event) => {
-    //     const value = event.target.value;
+    const validate = (event) => {
+        const value = event.target.value;
+        const usernameInputEl = usernameInput.value?.$el;
 
-    //     $refs.usernameInput.$el.classList.remove('ion-valid');
-    //     $refs.usernameInput.$el.classList.remove('ion-invalid');
+        usernameInputEl.classList.remove('ion-valid', 'ion-invalid');
 
-    //     if (value === '') return;
+        // Stop if the username input is empty, else continue and call the validateEmail function
+        if (value === '') return;
 
-    //     validateEmail(value)
-    //         ? $refs.usernameInput.$el.classList.add('ion-valid')
-    //         : $refs.usernameInput.$el.classList.add('ion-invalid');
-    // }
+        // Add ion-valid class if validateEmail returns true, else add ion-invalid class
+        validateEmail(value)
+            ? usernameInputEl.classList.add('ion-valid')
+            : usernameInputEl.classList.add('ion-invalid');
+    }
 
-    // const markTouched = () => {
-    //     $refs.usernameInput.$el.classList.add('ion-touched');
-    // }
+    const markTouched = () => {
+        const usernameInputEl = usernameInput.value?.$el;
+        usernameInputEl.classList.add('ion-touched');
+    }
 </script>
 
 <template>
@@ -58,20 +64,23 @@
                     <ion-input 
                         ref="usernameInput" 
                         type="email" 
+                        autocomplete="email"
+                        fill="outline"
+                        error-text="Please enter a valid e-mail address"
                         label="E-mail address" 
                         label-placement="stacked" 
-                        fill="outline" 
                         placeholder="Enter your e-mail address" 
-                        autocomplete="email"
                         v-model="username"
+                        @ionInput="validate"
+                        @ionBlur="markTouched"
                     ></ion-input>
                     <ion-input 
                         :type="passwordVisible ? 'text': 'password'" 
+                        autocomplete="current-password"
+                        fill="outline" 
                         label="Password" 
                         label-placement="stacked" 
-                        fill="outline" 
                         placeholder="Enter the password" 
-                        autocomplete="current-password"
                         v-model="password"
                     >
                         <ion-button slot="end" fill="clear" @click="togglePasswordVisibility" :aria-label="passwordVisible ? 'Hide password' : 'Show password'">
