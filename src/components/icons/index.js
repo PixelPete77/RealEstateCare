@@ -1,6 +1,8 @@
 export { default as ArrowRightIcon } from './ArrowRightIcon.vue';
 export { default as AvatarIcon } from './AvatarIcon.vue';
 export { default as CompletedIcon } from './CompletedIcon.vue';
+export { default as EyeIcon } from './EyeIcon.vue';
+export { default as EyeOffIcon } from './EyeOffIcon.vue';
 export { default as HelpIcon } from './HelpIcon.vue';
 export { default as KnowledgeBaseIcon } from './KnowledgeBaseIcon.vue';
 export { default as NotificationsIcon } from './NotificationsIcon.vue';

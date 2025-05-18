@@ -1,23 +1,27 @@
 <script setup>
     import { ref } from 'vue';
-   
     import { useAuthStore } from '@/stores/authStore';
     import { IonButton, IonContent, IonInput, IonPage } from '@ionic/vue';
+    import { EyeIcon, EyeOffIcon } from '@/components/icons';
 
     const auth = useAuthStore();
     const username = ref('');
     const password = ref('');
+    const passwordVisible = ref('false');
 
     const handleLogin = async () => {
-        console.log('Logging in with:', username.value, password.value);
         try {
             await auth.loginUser(username.value, password.value);
             // Redirect to the dashboard (home) after successful login
-            console.log(auth.user);
+            console.log(user.value);
         } catch (error) {
             console.error('Login failed:', error);
         }
     };
+
+    const togglePasswordVisibility = () => {
+        passwordVisible.value = !passwordVisible.value;
+    }
 
     // const validateEmail = (email) => {
     //     return email.match(
@@ -62,14 +66,19 @@
                         v-model="username"
                     ></ion-input>
                     <ion-input 
-                        type="password" 
+                        :type="passwordVisible ? 'text': 'password'" 
                         label="Password" 
                         label-placement="stacked" 
                         fill="outline" 
                         placeholder="Enter the password" 
                         autocomplete="current-password"
                         v-model="password"
-                    ></ion-input>
+                    >
+                        <ion-button slot="end" fill="clear" @click="togglePasswordVisibility" :aria-label="passwordVisible ? 'Hide password' : 'Show password'">
+                            <EyeIcon slot="icon-only" v-if="!passwordVisible" />
+                            <EyeOffIcon slot="icon-only" v-if="passwordVisible"  />
+                        </ion-button>
+                    </ion-input>
                     <ion-button type="submit" expand="block" :disabled="auth.authenticating">
                         <ion-spinner v-if="auth.authenticating" name="dots" />
                         <template v-else>Log in</template>
