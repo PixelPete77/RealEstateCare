@@ -4,7 +4,7 @@ import { fetchInspections } from "@/services/inspectionService";
 
 export const useInspectionsStore = defineStore('inspections', () => {
     // State
-    const errors = null;
+    const errors = ref(null);
     const inspections = ref([]);
     const loadingStatus = ref('loading');
 
