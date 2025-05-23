@@ -20,7 +20,7 @@ export const useAuthStore = defineStore('auth', () => {
             const currentUser = users.find(user => user.username === username && user.password === password);
 
             // Throw an error if the credentials are incorrect
-            if (!authenticatedUser) {
+            if (!currentUser) {
                 throw new Error('Invalid username or password');
             }
             // Set the authenticated user in the state
