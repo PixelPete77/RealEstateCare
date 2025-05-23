@@ -130,12 +130,11 @@ fieldset {
 /* ----- Ionic components style override and additions ----- */
 
 ion-button {
-  --padding-top: .75rem;
-  --padding-bottom: .75rem;
+  --padding-top: 1rem;
+  --padding-bottom: 1rem;
   --padding-start: 1rem;
   --padding-end: 1rem;
   font-size: 1rem;
-  font-weight: 500;
 }
 
 ion-checkbox {
