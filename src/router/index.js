@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 
+// TODO: Check if it would be better to use different layouts, or not render the Header and Footer components when the user is not logged in
+
 const routes = [
   {
     path: '/',

@@ -1,5 +1,6 @@
 <script setup>
     import { ref } from 'vue';
+    import { useRouter } from 'vue-router';
     import { useAuthStore } from '@/stores/authStore';
     import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue';
     import { EyeIcon, EyeOffIcon } from '@/components/icons';
@@ -8,6 +9,7 @@
     const code = ref(Number);
     const password = ref('');
     const passwordVisible = ref('false');
+    const router = useRouter();
     const step = ref('login');
     const usernameInput = ref(null);
     const username = ref('');
@@ -24,7 +26,7 @@
     const handleVerification = () => {
         if (auth.verifyUser(code.value)) {
             // Redirect to the dashboard page if the verification is successful
-            console.log('Verification successful');
+            router.push('/');
         };
     }
 
