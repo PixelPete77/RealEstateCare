@@ -68,7 +68,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, next) => {
+router.beforeEach((to) => {
   // Check if session data exists in localStorage. If so, the user is authenticated
   const session = JSON.parse(localStorage.getItem('session'));
   const isAuthenticated = session && Date.now() < session.expiresAt;

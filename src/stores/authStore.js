@@ -33,6 +33,17 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    const restoreUser = () => {
+        // Check if there is a session in localStorage and if it has not expired
+        const session = JSON.parse(localStorage.getItem('session'));
+        if (session && Date.now() < session.expiresAt) {
+            user.value = session.user;  // Restore the user data from session
+        } else {
+            user.value = null;
+            localStorage.removeItem('session'); // Delete session if it has expired
+        }
+    };
+
     const verifyUser = (code) => {
         errors.value = null;
         // Check if the entered code matches the code in the user's data
@@ -60,6 +71,7 @@ export const useAuthStore = defineStore('auth', () => {
         errors,
         user,
         authUser,
+        restoreUser,
         verifyUser
     }
 })
