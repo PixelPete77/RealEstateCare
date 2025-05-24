@@ -5,20 +5,28 @@
     import { EyeIcon, EyeOffIcon } from '@/components/icons';
 
     const auth = useAuthStore();
+    const code = ref(Number);
     const password = ref('');
     const passwordVisible = ref('false');
+    const step = ref('login');
     const usernameInput = ref(null);
     const username = ref('');
 
     const handleLogin = async () => {
-        try {
-            await auth.loginUser(username.value, password.value);
-            // Redirect to the dashboard (home) after successful login
-            console.log(user.value);
-        } catch (error) {
-            console.error('Login failed:', error);
+        // Call the authUser method from the authStore to authenticate the user
+        await auth.authUser(username.value, password.value);
+        // If the user is authenticated, the authStore will return a user object and we can continue to the verification step
+        if (auth.user) {
+            step.value = 'verify';
         }
     };
+
+    const handleVerification = () => {
+        if (auth.verifyUser(code.value)) {
+            // Redirect to the dashboard page if the verification is successful
+            console.log('Verification successful');
+        };
+    }
 
     const togglePasswordVisibility = () => {
         passwordVisible.value = !passwordVisible.value;
@@ -59,7 +67,7 @@
             <div class="wrapper">
                 <img src="/src/assets/images/RealEstateCare_logo_v.svg">
                 <h1>Login</h1>
-                <form @submit.prevent="handleLogin">
+                <form @submit.prevent="handleLogin" v-if="step === 'login'">
                     <p v-if="auth.errors">{{ auth.errors }}</p>
                     <ion-input 
                         ref="usernameInput" 
@@ -70,6 +78,7 @@
                         label="E-mail address" 
                         label-placement="stacked" 
                         placeholder="Enter your e-mail address" 
+                        required
                         v-model="username"
                         @ionInput="validate"
                         @ionBlur="markTouched"
@@ -80,7 +89,8 @@
                         fill="outline" 
                         label="Password" 
                         label-placement="stacked" 
-                        placeholder="Enter the password" 
+                        placeholder="Enter the password"
+                        required
                         v-model="password"
                     >
                         <ion-button slot="end" fill="clear" @click="togglePasswordVisibility" :aria-label="passwordVisible ? 'Hide password' : 'Show password'">
@@ -91,6 +101,22 @@
                     <ion-button type="submit" expand="block" :disabled="auth.authenticating">
                         <ion-spinner v-if="auth.authenticating" name="dots" />
                         <template v-else>Log in</template>
+                    </ion-button>
+                </form>
+                <form @submit.prevent="handleVerification" v-if="step === 'verify'">
+                    <p v-if="auth.errors">{{ auth.errors }}</p>
+                    <ion-input 
+                        type="number" 
+                        fill="outline"
+                        error-text="The code must be 6 digits"
+                        label="Verfication code" 
+                        label-placement="stacked" 
+                        placeholder="000000" 
+                        required
+                        v-model="code"
+                    ></ion-input>
+                    <ion-button type="submit" expand="block">
+                        Verify
                     </ion-button>
                 </form>
             </div>
@@ -104,6 +130,10 @@
         --padding-bottom: .5rem;
         --padding-start: .5rem;
         --padding-end: .5rem;
+    }
+
+    ion-spinner {
+        margin-block: -.375rem;
     }
 
     .wrapper {
@@ -127,7 +157,7 @@
         }
 
         & p {
-            color: red;
+            color: var(--ion-color-danger);
             margin-block: -1rem 1rem;
         }
     }

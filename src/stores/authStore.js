@@ -11,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
     // Actions
     const authUser = async (username, password) => { 
         authenticating.value = true;
+        errors.value = null; // Reset errors to clear possible previous error
         
         try {
             const users = await fetchUsers();
@@ -32,14 +33,25 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
-    // Getters
+    const verifyUser = (code) => {
+        errors.value = null;
+        // Check if the entered code matches the code in the user's data
+        if (Number(code) === user.value.code) {
+            return true;
+        } else {
+            errors.value = 'Invalid verification code';
+            return false;
+        }
+    }
     
+    // Getters
 
     // Make the state, actions and getters available to other components
     return {
+        authenticating,
         errors,
         user,
-        authenticating,
-        authUser
+        authUser,
+        verifyUser
     }
 })
