@@ -15,7 +15,6 @@ export const useAuthStore = defineStore('auth', () => {
         
         try {
             const users = await fetchUsers();
-
             // Since we don't need to specify if the username was not found or if the password did not match, 
             // we can check if the user exists and the password is correct at the same time 
             const currentUser = users.find(user => user.username === username && user.password === password);

@@ -1,5 +1,5 @@
 <script setup>
-    import { ref } from 'vue';
+    import { onBeforeUnmount, onMounted, ref } from 'vue';
     import { useRouter } from 'vue-router';
     import { useAuthStore } from '@/stores/authStore';
     import { IonButton, IonContent, IonInput, IonPage, IonSpinner } from '@ionic/vue';
@@ -19,8 +19,14 @@
         await auth.authUser(username.value, password.value);
         // If the user is authenticated, the authStore will return a user object and we can continue to the verification step
         if (auth.user) {
+            history.pushState({ step: 'verify' }, '', '');  // Push a new state to the history stack, so the user can navigate back to the login step
             step.value = 'verify';
         }
+    };
+
+    const handlePopState = (event) => {
+        // If the user moved back from 'verify' step, go back to 'login'
+        step.value = event.state?.step === 'verify' ? 'verify' : 'login';
     };
 
     const handleVerification = () => {
@@ -61,6 +67,14 @@
         const usernameInputEl = usernameInput.value?.$el;
         usernameInputEl.classList.add('ion-touched');
     }
+
+    onMounted(() => {
+        window.addEventListener('popstate', handlePopState);
+    });
+
+    onBeforeUnmount(() => {
+        window.removeEventListener('popstate', handlePopState);
+    });
 </script>
 
 <template>
