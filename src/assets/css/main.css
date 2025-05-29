@@ -103,6 +103,17 @@ form h2 {
   margin-block-end: 0;
 }
 
+.authform {
+    & ion-input {
+        margin-block-end: 1.5rem;
+    }
+
+    & p {
+        color: var(--ion-color-danger);
+        margin-block: -1rem 1rem;
+    }
+}
+
 fieldset {
   inline-size: 100%;
   border: none;
