@@ -1,8 +1,7 @@
 <script setup>
     import { RouterLink } from 'vue-router';
     import { IonButton, IonPopover, IonToolbar } from '@ionic/vue';
-    import AccountMenuItem from '@/components/accountmenu/AccountMenuItem.vue';
-    import AccountMenuLogout from '@/components/accountmenu/AccountMenuLogout.vue';
+    import { AccountMenuItem, AccountMenuLogout, AccountMenuProfile } from '@/components/accountmenu/';
     import { AvatarIcon, NotificationsIcon, SettingsIcon } from '@/components/icons/';
     
 </script>
@@ -20,6 +19,7 @@
                 <AvatarIcon slot="icon-only" />
             </ion-button>
             <ion-popover trigger="account-menu" :dismiss-on-select="true">
+                <AccountMenuProfile />
                 <AccountMenuItem link="/settings" text="Settings">
                     <SettingsIcon />
                 </AccountMenuItem>
