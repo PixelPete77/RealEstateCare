@@ -32,6 +32,12 @@ export const useAuthStore = defineStore('auth', () => {
         }
     }
 
+    const logoutUser = () => {
+        errors.value = null; // Reset errors (just in case, we shouldn't have any errors when a user was authenticated)
+        user.value = null; // Clear the user data
+        localStorage.removeItem('session'); // Remove the session from localStorage
+    }
+
     const restoreUser = () => {
         // Check if there is a session in localStorage and if it has not expired
         const session = JSON.parse(localStorage.getItem('session'));
@@ -70,6 +76,7 @@ export const useAuthStore = defineStore('auth', () => {
         errors,
         user,
         authUser,
+        logoutUser,
         restoreUser,
         verifyUser
     }

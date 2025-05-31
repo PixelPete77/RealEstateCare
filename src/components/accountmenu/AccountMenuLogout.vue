@@ -1,11 +1,18 @@
 <script setup>
+    import router from '@/router';
+    import { useAuthStore } from '@/stores/authStore';
     import { LogoutIcon } from '@/components/icons/';
 
-    
+    const auth = useAuthStore();
+
+    const handleLogout = () => {
+        auth.logoutUser(); // Call the logout method from the auth store to clear user data and remove the session
+        router.push({ name: 'Login' }); // Redirect to the Login page
+    };
 </script>
 
 <template>
-    <button>
+    <button @click="handleLogout">
         <LogoutIcon />
         Logout
     </button>   
@@ -24,6 +31,7 @@
     }
 
     svg {
+        block-size: auto;
         inline-size: 1.25rem;
         margin-inline-end: .375rem;
     }

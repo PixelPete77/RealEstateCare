@@ -31,7 +31,12 @@
         text-decoration: none;
     }
 
+    a:last-of-type {
+        border-block-end: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+    }
+
     :deep(svg) {
+        block-size: auto;
         inline-size: 1.25rem;
         margin-inline-end: .375rem;
     }
