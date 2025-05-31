@@ -5,6 +5,7 @@ export { default as EyeIcon } from './EyeIcon.vue';
 export { default as EyeOffIcon } from './EyeOffIcon.vue';
 export { default as HelpIcon } from './HelpIcon.vue';
 export { default as KnowledgeBaseIcon } from './KnowledgeBaseIcon.vue';
+export { default as LogoutIcon } from './LogoutIcon.vue';
 export { default as NotificationsIcon } from './NotificationsIcon.vue';
 export { default as NotificationsOffIcon } from './NotificationsOffIcon.vue';
 export { default as ScheduledIcon } from './ScheduledIcon.vue';

@@ -1,7 +1,10 @@
 <script setup>
     import { RouterLink } from 'vue-router';
-    import { IonButton, IonToolbar } from '@ionic/vue';
-    import { AvatarIcon, NotificationsIcon } from '@/components/icons/'
+    import { IonButton, IonPopover, IonToolbar } from '@ionic/vue';
+    import AccountMenuItem from '@/components/accountmenu/AccountMenuItem.vue';
+    import AccountMenuLogout from '@/components/accountmenu/AccountMenuLogout.vue';
+    import { AvatarIcon, NotificationsIcon, SettingsIcon } from '@/components/icons/';
+    
 </script>
 
 <template>
@@ -13,9 +16,15 @@
             <ion-button color="dark" size="large">
                 <NotificationsIcon slot="icon-only"/>
             </ion-button>
-            <ion-button color="dark" size="large">
+            <ion-button color="dark" size="large" id="account-menu">
                 <AvatarIcon slot="icon-only" />
             </ion-button>
+            <ion-popover trigger="account-menu" :dismiss-on-select="true">
+                <AccountMenuItem link="/settings" text="Settings">
+                    <SettingsIcon />
+                </AccountMenuItem>
+                <AccountMenuLogout />
+            </ion-popover>
         </div>
     </ion-toolbar>
 </template>
@@ -40,4 +49,7 @@
         inline-size: 1.5rem;
     }
 
+    ion-popover::part(backdrop) {
+        background-color: var(--ion-color-dark);
+    }
 </style>
