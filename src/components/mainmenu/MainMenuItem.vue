@@ -14,8 +14,8 @@
 </script>
 
 <template>
-    <li class="main-menu-item">
-        <router-link :to="link" class="main-menu-link">
+    <li>
+        <router-link :to="link">
             <slot></slot>
             {{ text }}
         </router-link>
@@ -23,11 +23,11 @@
 </template>
 
 <style scoped>
-    .main-menu-item {
+    li {
         flex: 1 1 0%;
     }
 
-    .main-menu-link {
+    a {
         block-size: 100%;
         position: relative;
         color: #fff;
@@ -66,7 +66,7 @@
         transition: opacity .2s ease;
     }
 
-    .main-menu-link.router-link-active :deep(svg) {
+    a.router-link-active :deep(svg) {
         opacity: 1;
     }
 </style>
