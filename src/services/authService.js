@@ -1,14 +1,12 @@
 import axios from "axios";
 
-const url = 'https://my-json-server.typicode.com/PixelPete77/RealEstateCare/users';
-
-export const fetchUsers = async () => {
-
-    // Fetch the users from our fake database
+export const fetchUser = async (username, password) => {
+    const url = `https://my-json-server.typicode.com/PixelPete77/RealEstateCare/users?username=${username}&password=${password}`;
+    // Fetch the user from our fake database, using the username and password
     try {
         const response = await axios.get(url); 
-        return response.data;  
+        return response.data[0]; // Return the user object from the array (we can assume that the response will always return an array with only one user object)
     } catch (error) {
-        throw new Error(`Failed to fetch users`);
+        throw new Error(`Failed to fetch user`);
     }
 }

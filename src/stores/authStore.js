@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { fetchUsers } from "@/services/authService";
+import { fetchUser } from "@/services/authService";
 
 export const useAuthStore = defineStore('auth', () => {
     // State
@@ -14,12 +14,11 @@ export const useAuthStore = defineStore('auth', () => {
         errors.value = null; // Reset errors to clear possible previous error
         
         try {
-            const users = await fetchUsers();
             // Since we don't need to specify if the username was not found or if the password did not match, 
             // we can check if the user exists and the password is correct at the same time 
-            const currentUser = users.find(user => user.username === username && user.password === password);
-
-            // Throw an error if the credentials are incorrect
+            const currentUser = await fetchUser(username, password);
+            
+            // Throw an error if the credentials are incorrect (no user found)
             if (!currentUser) {
                 throw new Error('Invalid username or password');
             }
