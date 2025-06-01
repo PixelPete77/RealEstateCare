@@ -52,12 +52,12 @@ export const useAuthStore = defineStore('auth', () => {
         errors.value = null;
         // Check if the entered code matches the code in the user's data
         if (Number(code) === user.value.code) {
-            // Define variables to store user data and set an expiration time for the session
-            const { id, firstName, lastName, settings } = user.value;
+            // Define a token using user data and set an expiration time for the session
+            const token = user.value.token;
             const expirationTime = 1000 * 60 * 60 * 24 * 14; // 14 days
-            // Store the user data in localStorage so the user can stay logged in
+            // Store the token in localStorage so the user can stay logged in
             localStorage.setItem('session', JSON.stringify({
-                user: { id, firstName, lastName, settings },
+                token: { token },
                 expiresAt: Date.now() + expirationTime
             }));
             return true;

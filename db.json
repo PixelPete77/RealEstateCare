@@ -194,6 +194,7 @@
             "username": "inspector1@realestatecare.com",
             "password": "Inspector1",
             "code": 123456,
+            "token": "#abc123!",
             "firstName": "Robert",
             "lastName": "Flynn",
             "settings": {
@@ -206,6 +207,7 @@
             "username": "inspector2@realestatecare.com",
             "password": "Inspector2",
             "code": 123456,
+            "token": "?456def_",
             "firstName": "Phil",
             "lastName": "Anselmo",
             "settings": {
@@ -218,6 +220,7 @@
             "username": "inspector3@realestatecare.com",
             "password": "Inspector3",
             "code": 123456,
+            "token": "~7g8h9j?",
             "firstName": "Randy",
             "lastName": "Blythe",
             "settings": {
