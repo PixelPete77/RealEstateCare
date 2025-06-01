@@ -7,7 +7,7 @@
     const auth = useAuthStore();
     const emit = defineEmits(['login-success']);
     const password = ref('');
-    const passwordVisible = ref('false');
+    const passwordVisible = ref(false);
     const usernameInput = ref(null);
     const username = ref('');
 
