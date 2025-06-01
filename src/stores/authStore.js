@@ -1,6 +1,6 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
-import { fetchUser } from "@/services/authService";
+import { fetchUser, fetchUserByToken } from "@/services/authService";
 
 export const useAuthStore = defineStore('auth', () => {
     // State
@@ -37,11 +37,23 @@ export const useAuthStore = defineStore('auth', () => {
         localStorage.removeItem('session'); // Remove the session from localStorage
     }
 
-    const restoreUser = () => {
-        // Check if there is a session in localStorage and if it has not expired
-        const session = JSON.parse(localStorage.getItem('session'));
+    const restoreUser = async () => {
+        if (user.value) return; // Check if there is already a user in the state so we don't unnecessarily fetch it again
+
+        const session = JSON.parse(localStorage.getItem('session')); // Check if there is a session in localStorage and if it has not expired
+
         if (session && Date.now() < session.expiresAt) {
-            user.value = session.user;  // Restore the user data from session
+            try {
+                const tokenUser = await fetchUserByToken(session.token); // Use the stored token to fetch the user data from our fake database
+                // Throw an error if a user wasn't found
+                if (!tokenUser) {
+                    // TODO: Handle the case when the user is not found
+                }
+                // Set the authenticated user in the state
+                user.value = tokenUser;
+            } catch (error) {
+                console.error('Error restoring user from session:', error);
+            }
         } else {
             user.value = null;
             localStorage.removeItem('session'); // Delete session if it has expired
@@ -52,12 +64,11 @@ export const useAuthStore = defineStore('auth', () => {
         errors.value = null;
         // Check if the entered code matches the code in the user's data
         if (Number(code) === user.value.code) {
-            // Define a token using user data and set an expiration time for the session
-            const token = user.value.token;
+            // Define an expiration time for the session
             const expirationTime = 1000 * 60 * 60 * 24 * 14; // 14 days
             // Store the token in localStorage so the user can stay logged in
             localStorage.setItem('session', JSON.stringify({
-                token: { token },
+                token: user.value.token,
                 expiresAt: Date.now() + expirationTime
             }));
             return true;

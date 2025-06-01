@@ -15,8 +15,8 @@
   );
 
   // Check if a session exists and restore user data
-  onMounted(() => {
-    auth.restoreUser();
+  onMounted(async () => {
+    await auth.restoreUser();
   });
 </script>
 
