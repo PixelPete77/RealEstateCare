@@ -77,8 +77,12 @@ export const useAuthStore = defineStore('auth', () => {
             return false;
         }
     }
+
+    const setNotifications = (value) => {
+        // Since we are using a fake database, we can't actually save the setting. But let's pretend we can.
+        user.value.settings.notifications = value; // Update the user's notification setting
+    }
     
-    // Getters
 
     // Make the state, actions and getters available to other components
     return {
@@ -88,6 +92,7 @@ export const useAuthStore = defineStore('auth', () => {
         authUser,
         logoutUser,
         restoreUser,
-        verifyUser
+        verifyUser,
+        setNotifications
     }
 })
