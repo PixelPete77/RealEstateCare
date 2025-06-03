@@ -49,6 +49,11 @@
         inline-size: 1.5rem;
     }
 
+    ion-popover {
+        --width: fit-content;
+    }
+
+
     ion-popover::part(backdrop) {
         background-color: var(--ion-color-dark);
     }

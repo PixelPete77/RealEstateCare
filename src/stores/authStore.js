@@ -49,8 +49,7 @@ export const useAuthStore = defineStore('auth', () => {
                 if (!tokenUser) {
                     // TODO: Handle the case when the user is not found
                 }
-                // Set the authenticated user in the state
-                user.value = tokenUser;
+                user.value = tokenUser; // Set the authenticated user in the state
             } catch (error) {
                 console.error('Error restoring user from session:', error);
             }

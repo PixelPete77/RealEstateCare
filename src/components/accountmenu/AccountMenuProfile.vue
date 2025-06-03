@@ -5,12 +5,22 @@
 </script>
 
 <template>
-    <span>
-        {{ auth.user.firstName }} {{ auth.user.lastName }}
-    </span>
-    {{ auth.user.username }}
+    <p>
+        <span>
+            {{ auth.user.firstName }} {{ auth.user.lastName }}
+        </span>
+        {{ auth.user.username }}
+    </p>
+    
 </template>
 
 <style scoped>
-    
+    p {
+        padding: .2rem 1rem;
+
+        & span {
+            display: block;
+            font-weight: 700;
+        }
+    }
 </style>
