@@ -1,9 +1,8 @@
 <script setup>
     import { RouterLink } from 'vue-router';
-    import { IonButton, IonPopover, IonToolbar } from '@ionic/vue';
-    import { AccountMenuItem, AccountMenuLogout, AccountMenuProfile } from '@/components/accountmenu/';
-    import { AvatarIcon, NotificationsIcon, SettingsIcon } from '@/components/icons/';
-    
+    import { IonToolbar } from '@ionic/vue';
+    import AccountMenu from './accountmenu/AccountMenu.vue';
+    import SettingsButton from './settingsbutton/SettingsButton.vue';
 </script>
 
 <template>
@@ -12,19 +11,8 @@
             <img src="/src/assets/images/RealEstateCare_logo.svg" class="logo" slot="start">
         </router-link>
         <div slot="end">
-            <ion-button color="dark" size="large">
-                <NotificationsIcon slot="icon-only"/>
-            </ion-button>
-            <ion-button color="dark" size="large" id="account-menu">
-                <AvatarIcon slot="icon-only" />
-            </ion-button>
-            <ion-popover trigger="account-menu" :dismiss-on-select="true">
-                <AccountMenuProfile />
-                <AccountMenuItem link="/settings" text="Settings">
-                    <SettingsIcon />
-                </AccountMenuItem>
-                <AccountMenuLogout />
-            </ion-popover>
+            <SettingsButton />
+            <AccountMenu />
         </div>
     </ion-toolbar>
 </template>
@@ -37,24 +25,5 @@
     .logo {
         block-size: 56px;
         margin-block: .5rem;
-    }
-
-    button {
-        background: none;
-        color: inherit;
-        padding: .75rem;
-    }
-    
-    ion-button svg {
-        inline-size: 1.5rem;
-    }
-
-    ion-popover {
-        --width: fit-content;
-    }
-
-
-    ion-popover::part(backdrop) {
-        background-color: var(--ion-color-dark);
     }
 </style>
