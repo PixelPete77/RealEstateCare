@@ -7,9 +7,9 @@
 <template>
     <p>
         <span>
-            {{ auth.user.firstName }} {{ auth.user.lastName }}
+            {{ auth.user?.firstName }} {{ auth.user?.lastName }}
         </span>
-        {{ auth.user.username }}
+        {{ auth.user?.username }}
     </p>
     
 </template>

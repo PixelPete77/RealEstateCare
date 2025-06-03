@@ -6,8 +6,8 @@
     const auth = useAuthStore();
 
     const handleLogout = () => {
-        auth.logoutUser(); // Call the logout method from the auth store to clear user data and remove the session
         router.push({ name: 'Login' }); // Redirect to the Login page
+        auth.logoutUser(); // Call the logout method from the auth store to clear user data and remove the session
     };
 </script>
 
