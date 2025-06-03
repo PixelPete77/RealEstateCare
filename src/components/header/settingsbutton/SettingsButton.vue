@@ -1,11 +1,28 @@
 <script setup>
+    import { ref } from 'vue';
     import { IonButton } from '@ionic/vue';
-    import { NotificationsIcon } from '@/components/icons/';
+    import { NotificationsIcon, NotificationsOffIcon } from '@/components/icons/';
+    import { useAuthStore } from '@/stores/authStore';
+
+    const auth = useAuthStore();
+    const notifications = ref(auth.user.settings.notifications);  // Set initial notifications based on value from auth store
+
+    const toggleNotifications = () => {
+        notifications.value = !notifications.value;  // Toggle notifications
+        // auth.setNotifications(notifications.value);  // Update the auth store with the new value
+    }
 </script>
 
 <template>
-    <ion-button color="dark" size="large">
-        <NotificationsIcon slot="icon-only"/>
+    <ion-button color="dark" size="large" @click="toggleNotifications">
+        <template v-if="notifications">
+            <NotificationsIcon slot="icon-only"/>
+            <span class="sr-only">Turn notifications off</span>
+        </template>
+        <template v-else>
+            <NotificationsOffIcon slot="icon-only"/>
+            <span class="sr-only">Turn notifications on</span>
+        </template>
     </ion-button>
 </template>
 
