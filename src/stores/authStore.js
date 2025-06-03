@@ -40,7 +40,8 @@ export const useAuthStore = defineStore('auth', () => {
     const restoreUser = async () => {
         if (user.value) return; // Check if there is already a user in the state so we don't unnecessarily fetch it again
 
-        const session = JSON.parse(localStorage.getItem('session')); // Check if there is a session in localStorage and if it has not expired
+        // Check if there is a session in localStorage and if it has not expired
+        const session = JSON.parse(localStorage.getItem('session'));
 
         if (session && Date.now() < session.expiresAt) {
             try {
