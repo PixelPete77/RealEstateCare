@@ -5,6 +5,7 @@ import { useUserStore } from './userStore';
 
 export const useInspectionsStore = defineStore('inspections', () => {
     // State
+    const completedInspections = ref([]);
     const errors = ref(null);
     const inspections = ref([]);
     const loadingStatus = ref('loading');
@@ -19,7 +20,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
             // Ideally we should only fetch inspections for this user which are not completed
             // But since we're using a fake database where we can't use 'null' as a parameter in the url, we're fetching all inspections and filtering them
             const data = await fetchInspections(inspectorId); // Fetch inspections for the specific user
-            inspections.value = data.filter(inspection => inspection.completedDate !== null); // Filter out inspections which have a completed date (the value is not null)
+            completedInspections.value = data.filter(inspection => inspection.completedDate !== null); // Filter out inspections which have a completed date (the value is not null)
         } catch (error) {
             errors.value = error.message;
         } finally {
@@ -48,6 +49,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
 
     // Make the state, actions and getters available to other components
     return {
+        completedInspections,
         errors,
         inspections,
         loadingStatus,

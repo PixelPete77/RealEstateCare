@@ -10,7 +10,7 @@
     // --- Computed properties -------------------------
 
     const sortedInspections = computed(() => {
-        return inspections.inspections.slice().sort((a, b) => {
+        return inspections.completedInspections.slice().sort((a, b) => {
             return new Date(a.date) - new Date(b.date); // Sort the inspections by decending date
         });
     });
