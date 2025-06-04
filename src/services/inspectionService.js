@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
-const url = 'https://my-json-server.typicode.com/PixelPete77/RealEstateCare/inspections';
-// const url = 'https://my-json-server.typicode.com/PixelPete77/RealEstateCare/inspections?inspectorId=1';
+export const fetchInspections = async (inspectorId) => {
+    // Use the provided id so we can fetch inspections only for this specific inspector
+    const url = `https://my-json-server.typicode.com/PixelPete77/RealEstateCare/inspections?inspectorId=${inspectorId}`;
 
-export const fetchInspections = async () => {
     try {
         const response = await axios.get(url);
         return response.data;
