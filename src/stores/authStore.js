@@ -1,7 +1,7 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
-import { fetchUser, fetchUserByToken } from "@/services/authService";
-import { useUserStore } from "./userStore";
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
+import { fetchUser, fetchUserByToken } from '@/services/authService';
+import { useUserStore } from './userStore';
 
 export const useAuthStore = defineStore('auth', () => {
     // State

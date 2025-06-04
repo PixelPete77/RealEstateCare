@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const fetchUser = async (username, password) => {
     const url = `https://my-json-server.typicode.com/PixelPete77/RealEstateCare/users?username=${username}&password=${password}`;
