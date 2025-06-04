@@ -13,9 +13,9 @@
 
     const handleLogin = async () => {
         // Call the authUser method from the authStore to authenticate the user
-        await auth.authUser(username.value, password.value);
-        // If the user is authenticated, the authStore will return a user object and we can continue to the verification step
-        if (auth.user) {
+        const successfulLogin = await auth.authUser(username.value, password.value);
+        // If the user is authenticated, the authStore will return 'true' and we can continue to the verification step
+        if (successfulLogin) {
             history.pushState({ step: 'verify' }, '', '');  // Push a new state to the history stack, so the user can navigate back to the login step
             emit('login-success'); // Emit the login was a success to the parent component, so we can switch to the verification step
         }

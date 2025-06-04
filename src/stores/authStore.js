@@ -1,12 +1,13 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { fetchUser, fetchUserByToken } from "@/services/authService";
+import { useUserStore } from "./userStore";
 
 export const useAuthStore = defineStore('auth', () => {
     // State
     const authenticating = ref(false);
     const errors = ref(null);
-    const user = ref(null);
+    const userStore = useUserStore();
 
     // Actions
     const authUser = async (username, password) => { 
@@ -22,10 +23,12 @@ export const useAuthStore = defineStore('auth', () => {
             if (!currentUser) {
                 throw new Error('Invalid username or password');
             }
-            // Set the authenticated user in the state
-            user.value = currentUser;
+            // Set the authenticated user in the state in the userStore
+            userStore.setUser(currentUser);
+            return true; // Return true to indicate successful authentication, so we can continue to the verification step
         } catch (error) {
             errors.value = error.message;
+            return false;
         } finally {
             authenticating.value = false;
         }
@@ -33,12 +36,12 @@ export const useAuthStore = defineStore('auth', () => {
 
     const logoutUser = () => {
         errors.value = null; // Reset errors (just in case, we shouldn't have any errors when a user was authenticated)
-        user.value = null; // Clear the user data
+        userStore.clearUser(); // Clear the user data
         localStorage.removeItem('session'); // Remove the session from localStorage
     }
 
     const restoreUser = async () => {
-        if (user.value) return; // Check if there is already a user in the state so we don't unnecessarily fetch it again
+        if (userStore.getUser) return; // Check if there is already a user in the state so we don't unnecessarily fetch it again
 
         // Check if there is a session in localStorage and if it has not expired
         const session = JSON.parse(localStorage.getItem('session'));
@@ -50,25 +53,24 @@ export const useAuthStore = defineStore('auth', () => {
                 if (!tokenUser) {
                     // TODO: Handle the case when the user is not found
                 }
-                user.value = tokenUser; // Set the authenticated user in the state
+                userStore.setUser(tokenUser); // Set the authenticated user in the state in the userStore
             } catch (error) {
                 console.error('Error restoring user from session:', error);
             }
         } else {
-            user.value = null;
-            localStorage.removeItem('session'); // Delete session if it has expired
+            logoutUser(); // If there is no valid session, call the logoutUser function to clear the user data and remove the session from localStorage
         }
     };
 
     const verifyUser = (code) => {
         errors.value = null;
         // Check if the entered code matches the code in the user's data
-        if (Number(code) === user.value.code) {
+        if (Number(code) === userStore.getUser.code) {
             // Define an expiration time for the session
             const expirationTime = 1000 * 60 * 60 * 24 * 14; // 14 days
             // Store the token in localStorage so the user can stay logged in
             localStorage.setItem('session', JSON.stringify({
-                token: user.value.token,
+                token: userStore.getUser.token,
                 expiresAt: Date.now() + expirationTime
             }));
             return true;
@@ -77,22 +79,15 @@ export const useAuthStore = defineStore('auth', () => {
             return false;
         }
     }
-
-    const setNotifications = (value) => {
-        // Since we are using a fake database, we can't actually save the setting. But let's pretend we can.
-        user.value.settings.notifications = value; // Update the user's notification setting
-    }
     
 
     // Make the state, actions and getters available to other components
     return {
         authenticating,
         errors,
-        user,
         authUser,
         logoutUser,
         restoreUser,
-        verifyUser,
-        setNotifications
+        verifyUser
     }
 })

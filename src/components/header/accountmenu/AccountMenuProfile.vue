@@ -1,15 +1,15 @@
 <script setup>
-    import { useAuthStore } from '@/stores/authStore';
+    import { useUserStore } from '@/stores/userStore';
     
-    const auth = useAuthStore();
+    const userStore = useUserStore();
 </script>
 
 <template>
     <p>
         <span>
-            {{ auth.user?.firstName }} {{ auth.user?.lastName }}
+            {{ userStore.user?.firstName }} {{ userStore.user?.lastName }}
         </span>
-        {{ auth.user?.username }}
+        {{ userStore.user?.username }}
     </p>
     
 </template>

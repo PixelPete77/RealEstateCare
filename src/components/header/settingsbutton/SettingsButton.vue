@@ -2,10 +2,10 @@
     import { ref } from 'vue';
     import { IonButton } from '@ionic/vue';
     import { NotificationsIcon, NotificationsOffIcon } from '@/components/icons/';
-    import { useAuthStore } from '@/stores/authStore';
+    import { useUserStore } from '@/stores/userStore';
 
-    const auth = useAuthStore();
-    const notifications = ref(auth.user.settings.notifications);  // Set initial notifications based on value from auth store
+    const userStore = useUserStore();
+    const notifications = ref(userStore.user.settings.notifications);  // Set initial notifications based on value from auth store
 
     const toggleNotifications = () => {
         notifications.value = !notifications.value;  // Toggle notifications
