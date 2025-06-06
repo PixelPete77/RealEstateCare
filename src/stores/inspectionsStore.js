@@ -12,7 +12,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
     const userStore = useUserStore();
 
     // Actions
-    const fetchCompletedInspectionsData = async () => {
+    const fetchCompletedInspections = async () => {
         loadingStatus.value = 'loading';
         const inspectorId = userStore.getUser?.id; // Get the user's id from the user store
 
@@ -28,7 +28,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
         }
     }
 
-    const fetchScheduledInspectionsData = async () => {
+    const fetchScheduledInspections = async () => {
         loadingStatus.value = 'loading';
         const inspectorId = userStore.getUser?.id; // Get the user's id from the user store
 
@@ -53,8 +53,8 @@ export const useInspectionsStore = defineStore('inspections', () => {
         errors,
         inspections,
         loadingStatus,
-        fetchCompletedInspectionsData,
-        fetchScheduledInspectionsData,
+        fetchCompletedInspections,
+        fetchScheduledInspections,
         getInspectionById
     }
 })
