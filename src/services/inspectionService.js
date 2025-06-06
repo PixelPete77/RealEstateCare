@@ -11,3 +11,14 @@ export const fetchInspections = async (inspectorId) => {
         throw new Error(`Failed to fetch inspections: ${error.message}`);
     }
 }
+
+export const fetchInspection = async (id) => {
+    const url = `https://my-json-server.typicode.com/PixelPete77/RealEstateCare/inspections?id=${id}`;
+
+    try {
+        const response = await axios.get(url);
+        return response.data;
+    } catch (error) {
+        throw new Error(`Failed to fetch inspection with id ${id}: ${error.message}`);
+    }
+}

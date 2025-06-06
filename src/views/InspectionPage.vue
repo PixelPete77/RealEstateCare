@@ -24,23 +24,25 @@
     // --- Computed properties -------------------------
 
     // Get the inspection data based on the id
-    const inspection = computed(() => {
-        return inspections.getInspectionById(route.params.id);
-    });
+    const inspection = computed(() => inspections.getInspection);
 
     // Format the inspection date
     const formattedDate = computed(() => formatDate(inspection.value.date));
 
     // Format the date the inspection was completed, if not null
     const formattedCompletedDate = computed(() => formatDate(inspection.value?.completedDate));
+
+    const loading = computed(() => {
+        return inspections.loadingStatus === 'loading';
+    })
     
     
     // --- Events --------------------------------------
 
     // Check if inspection data is present when the component is mounted
     onMounted(() => {
-        if (!inspections.inspections.length) {
-            inspections.fetchInspectionsData();
+        if (!inspection.value) {
+            inspections.fetchInspectionById(route.params.id);
         } 
     });
 </script>
@@ -55,7 +57,7 @@
                 </router-link>
                 <h1>Inspection #{{ route.params.id }}</h1>
                 <!-- Show loading indicator when fetching data -->
-                <div class="loader" v-if="!inspections.inspections.length">
+                <div class="loader" v-if="loading">
                     <loaderAnim />
                     <p>Loading inspection</p>
                 </div>
