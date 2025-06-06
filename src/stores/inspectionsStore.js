@@ -14,6 +14,8 @@ export const useInspectionsStore = defineStore('inspections', () => {
 
     // Actions
     const fetchCompletedInspections = async () => {
+        if (completedInspections.value.length) return; // Check if the completed inpections are already in the state (not an empty array) so we don't unnecessarily fetch it again
+
         loadingStatus.value = 'loading';
         const inspectorId = userStore.getUser?.id; // Get the user's id from the user store
 
@@ -30,6 +32,8 @@ export const useInspectionsStore = defineStore('inspections', () => {
     }
 
     const fetchScheduledInspections = async () => {
+        if (inspections.value.length) return; // Check if the completed inpections are already in the state (not an empty array) so we don't unnecessarily fetch it again
+
         loadingStatus.value = 'loading';
         const inspectorId = userStore.getUser?.id; // Get the user's id from the user store
 
