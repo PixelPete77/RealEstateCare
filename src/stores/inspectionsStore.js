@@ -48,7 +48,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
 
         try {
             const data = await fetchInspection(id);
-            inspection.value = data[0]; // Assuming the API returns an array, we take the first element
+            inspection.value = data[0]; // Assuming the API returns an array, we take the first element and assign it to the inspection state
             console.log('Fetched inspection:', inspection.value);
         } catch (error) {
             errors.value = error.message;
@@ -57,14 +57,22 @@ export const useInspectionsStore = defineStore('inspections', () => {
         }
     }
 
+    // Inpsection data can be retreived from existing inspections or fetched from the AP
+    const loadInspection = async (id) => {
+        const existingInspection = getInspectionById(id); // Check if the inspection is already available
+        if (existingInspection) {
+            inspection.value = existingInspection; // If the inspection was found in the existing inspections, assign it to the inspection state
+        } else {
+            await fetchInspectionById(id); // Otherwise, fetch it using the provided id
+        }
+    }
+    
     // Getters
     const getInspectionById = (id) => {
-        // Find the inspection by id in completed or scheduled inspections and return it
+        // Find the inspection by id in completed or scheduled inspections
         return inspections.value.find(inspection => inspection.id === parseInt(id)) ||
-                completedInspections.value.find(inspection => inspection.id === parseInt(id));
+                            completedInspections.value.find(inspection => inspection.id === parseInt(id));
     }
-
-    const getInspection = computed(() => inspection.value);
 
     // Make the state, actions and getters available to other components
     return {
@@ -76,7 +84,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
         fetchCompletedInspections,
         fetchScheduledInspections,
         fetchInspectionById,
-        getInspectionById,
-        getInspection
+        loadInspection,
+        getInspectionById
     }
 })

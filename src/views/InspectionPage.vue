@@ -23,8 +23,7 @@
 
     // --- Computed properties -------------------------
 
-    // Get the inspection data based on the id
-    const inspection = computed(() => inspections.getInspection);
+    const inspection = computed(() => inspections.inspection);
 
     // Format the inspection date
     const formattedDate = computed(() => formatDate(inspection.value.date));
@@ -39,11 +38,9 @@
     
     // --- Events --------------------------------------
 
-    // Check if inspection data is present when the component is mounted
+    // Get the inspection data when the component is mounted
     onMounted(() => {
-        if (!inspection.value) {
-            inspections.fetchInspectionById(route.params.id);
-        } 
+        inspections.loadInspection(route.params.id);
     });
 </script>
 
