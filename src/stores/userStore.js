@@ -15,6 +15,13 @@ export const useUserStore = defineStore('user', () => {
         user.value.settings.notifications = value; // Update the user's notification setting
     }
 
+    const setTheme = (value) => {
+        user.value.settings.theme = value; // Update the user's theme setting
+
+        // Save the theme setting to localStorage so we can use it even if the user is not logged in
+        localStorage.setItem('theme',  user.value.settings.theme);
+    }
+
     const setUser = (userData) => {
         user.value = userData; // Set the received user data in the state
     };
@@ -26,8 +33,9 @@ export const useUserStore = defineStore('user', () => {
     return {
         user,
         clearUser,
-        setUser,
         setNotifications,
+        setTheme,
+        setUser,
         getUser
     };
 })
