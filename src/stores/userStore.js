@@ -15,6 +15,11 @@ export const useUserStore = defineStore('user', () => {
         user.value.settings.notifications = value; // Update the user's notification setting
     }
 
+    const updateProfile = (firstName, lastName ) => {
+        user.value.firstName = firstName; // Update the user's name
+        user.value.lastName = lastName;
+    }
+
     const updateTheme = (value) => {
         user.value.settings.theme = value; // Update the user's theme setting
     }
@@ -31,6 +36,7 @@ export const useUserStore = defineStore('user', () => {
         user,
         clearUser,
         updateNotifications,
+        updateProfile,
         updateTheme,
         setUser,
         getUser

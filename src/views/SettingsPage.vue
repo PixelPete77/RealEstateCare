@@ -24,13 +24,25 @@
             <div class="wrapper">
                 <h1>Settings</h1>
                 <h2>Profile</h2>
-                <form @submit.prevent="userStore.updateProfile()">
+                <form @submit.prevent="userStore.updateProfile(user.firstName, user.lastName)">
                     <ion-input 
                         fill="outline"
                         label="Username" 
                         label-placement="stacked" 
                         :value="user.username"
                         disabled
+                    ></ion-input>
+                    <ion-input 
+                        fill="outline"
+                        label="Firstname" 
+                        label-placement="stacked" 
+                        v-model="user.firstName"
+                    ></ion-input>
+                    <ion-input 
+                        fill="outline"
+                        label="Lastname" 
+                        label-placement="stacked" 
+                        v-model="user.lastName"
                     ></ion-input>
 
                     <ion-button type="submit">Update Profile</ion-button>
