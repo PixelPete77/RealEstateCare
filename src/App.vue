@@ -3,6 +3,7 @@
   import { useRoute } from 'vue-router';
   import { useAuthStore } from '@/stores/authStore';
   import { IonApp, IonRouterOutlet } from '@ionic/vue';
+  import { applyTheme } from './composables/applyTheme';
   import DefaultLayout from './components/layout/DefaultLayout.vue';
   import LoginLayout from './components/layout/LoginLayout.vue';
   import LoaderAnim from './components/loader/loaderAnim.vue';
@@ -16,8 +17,12 @@
     route.meta.layout === 'login' ? LoginLayout : DefaultLayout
   );
 
-  // Check if a session exists and restore user data
+  // 
+  // set the theme and check if a session exists and restore user data
   onMounted(async () => {
+    const theme = localStorage.getItem('theme'); // Get the theme from localStorage
+    applyTheme(theme || 'system'); // Apply the theme from localStorage or default to 'system' if not set
+
     await auth.restoreUser();
     ready.value = true;
   });
