@@ -2,9 +2,20 @@
     import { computed } from 'vue';
     import { IonButton, IonContent, IonInput, IonPage, IonSelect, IonSelectOption } from '@ionic/vue';
     import { useUserStore } from '@/stores/userStore';
+    import { applyTheme } from '@/composables/applyTheme';
 
     const userStore = useUserStore();
     const user = computed(() => userStore.user);
+
+    const handleTheme = (event) => {
+        const theme = event.detail.value;
+        
+        applyTheme(theme); // Apply the theme
+
+        userStore.updateTheme(theme); // Call the action in userStore to update the theme setting in the database
+
+        localStorage.setItem('theme',  theme); // Save the theme setting to localStorage so we can use it even if the user is not logged in
+    };
 </script>
 
 <template>
@@ -30,7 +41,7 @@
                     label="Theme" 
                     label-placement="stacked" 
                     v-model="user.settings.theme" 
-                    @ionChange="(evt) => userStore.setTheme(evt.detail.value)"
+                    @ionChange="handleTheme($event)"
                 >
                     <ion-select-option value="system">System default</ion-select-option>
                     <ion-select-option value="light">Light</ion-select-option>

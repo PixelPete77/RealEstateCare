@@ -9,7 +9,7 @@
 
     const toggleNotifications = () => {
         notifications.value = !notifications.value;  // Toggle notifications
-        auth.setNotifications(notifications.value);  // Update the auth store with the new value
+        userStore.updateNotifications(notifications.value);  // Update the auth store with the new value
     }
 </script>
 

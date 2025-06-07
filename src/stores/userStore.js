@@ -10,16 +10,13 @@ export const useUserStore = defineStore('user', () => {
         user.value = null;
     };
 
-    const setNotifications = (value) => {
+    const updateNotifications = (value) => {
         // Since we are using a fake database, we can't actually save the setting. But let's pretend we can.
         user.value.settings.notifications = value; // Update the user's notification setting
     }
 
-    const setTheme = (value) => {
+    const updateTheme = (value) => {
         user.value.settings.theme = value; // Update the user's theme setting
-
-        // Save the theme setting to localStorage so we can use it even if the user is not logged in
-        localStorage.setItem('theme',  user.value.settings.theme);
     }
 
     const setUser = (userData) => {
@@ -33,8 +30,8 @@ export const useUserStore = defineStore('user', () => {
     return {
         user,
         clearUser,
-        setNotifications,
-        setTheme,
+        updateNotifications,
+        updateTheme,
         setUser,
         getUser
     };
