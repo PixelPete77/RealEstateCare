@@ -276,6 +276,22 @@ ion-datetime-button {
   justify-content: start;
 }
 
+ion-toast {
+  --box-shadow: 3px 3px 10px 0 rgba(0, 0, 0, 0.2);
+  --width: fit-content;
+  font-size: 1rem;
+}
+
+ion-toast.toast-success {
+  --background: var(--ion-color-success);
+  --color: #000;
+}
+
+ion-toast.toast-error {
+  --background: var(--ion-color-danger);
+  --color: #fff;
+}
+
 
 /* ----- Utility ----- */
 

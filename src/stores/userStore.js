@@ -1,5 +1,6 @@
 import { computed, ref } from 'vue';
 import { defineStore } from 'pinia';
+import { updateUserNotificationSetting, updateUserProfile, updateUserThemeSetting } from '@/services/userService';
 
 export const useUserStore = defineStore('user', () => {
     // State
@@ -10,18 +11,36 @@ export const useUserStore = defineStore('user', () => {
         user.value = null;
     };
 
-    const updateNotifications = (value) => {
+    const updateNotifications = async (value) => {
         // Since we are using a fake database, we can't actually save the setting. But let's pretend we can.
-        user.value.settings.notifications = value; // Update the user's notification setting
+        try {
+            await updateUserNotificationSetting(value); // Update the notifications setting in the fake database
+            user.value.settings.notifications = value; // Update the user's notification setting
+        } catch (error) {
+            // Do something when the update to the notification setting fails
+        }
     }
 
-    const updateProfile = (firstName, lastName ) => {
-        user.value.firstName = firstName; // Update the user's name
-        user.value.lastName = lastName;
+    const updateProfile = async (firstName, lastName) => {
+        try {
+            await updateUserProfile(firstName, lastName); // Update the profile data in the fake database
+            user.value.firstName = firstName; // Update the user's name
+            user.value.lastName = lastName;
+            console.log('Profile updated successfully', user.value.firstName, user.value.lastName); // Log success message
+            return { success: true };
+        } catch (error) {
+            // Do something when the profile update fails
+            return { success: false };
+        }
     }
 
-    const updateTheme = (value) => {
-        user.value.settings.theme = value; // Update the user's theme setting
+    const updateTheme = async (value) => {
+        try {
+            await updateUserThemeSetting(value); // Update the theme setting in the fake database
+            user.value.settings.theme = value; // Update the user's theme setting
+        } catch (error) {
+            // Do something when the theme update fails
+        }
     }
 
     const setUser = (userData) => {
