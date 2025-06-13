@@ -92,6 +92,9 @@
                         Save inspection
                     </ion-button>
                 </form>
+                <template v-else>
+                    <p>Inspection not found.</p>
+                </template>
             </div>
         </ion-content>
     </ion-page>
