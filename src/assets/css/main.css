@@ -252,6 +252,7 @@ ion-button {
   --padding-start: 1rem;
   --padding-end: 1rem;
   font-size: 1rem;
+  font-weight: 600;
 }
 
 ion-checkbox {
