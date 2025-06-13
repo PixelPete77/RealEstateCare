@@ -23,7 +23,7 @@
     const loading = computed(() => {
         return inspections.loadingStatus === 'loading';
     })
- 
+
     // --- Events --------------------------------------
 
     // Get the inspection data when the component is mounted
@@ -66,14 +66,26 @@
                     </p>
                 </div>
                 <form v-if="inspection">
-                    <h2>Record damage</h2>
+                    <h2 v-if="!inspection.completedDate || inspection.damage.length > 0">Record damage</h2>
                     <InspectionFormDamage v-for="dmg in inspection.damage" :key="dmg.id" :dmg="dmg" />
-                    <h2>Record deferred maintenance</h2>
+                    <ion-button fill="outline" v-if="!inspection.completedDate">
+                        Add damage
+                    </ion-button>
+                    <h2 v-if="!inspection.completedDate || inspection.maintenance.length > 0">Record deferred maintenance</h2>
                     <InspectionFormMaintenance v-for="mntnc in inspection.maintenance" :key="mntnc.id" :mntnc="mntnc" />
-                    <h2>Inspect technical installations</h2>
+                    <ion-button fill="outline" v-if="!inspection.completedDate">
+                        Add maintenance
+                    </ion-button>
+                    <h2 v-if="!inspection.completedDate || inspection.installations.length > 0">Inspect technical installations</h2>
                     <InspectionFormInstallation v-for="instal in inspection.installations" :key="instal.id" :instal="instal"/>
-                    <h2>Inventory modifications</h2>
+                    <ion-button fill="outline" v-if="!inspection.completedDate">
+                        Add inspect installation
+                    </ion-button>
+                    <h2 v-if="!inspection.completedDate || inspection.modifications.length > 0">Inventory modifications</h2>
                     <InspectionFormModification v-for="mod in inspection.modifications" :key="mod.id" :mod="mod"/>
+                    <ion-button fill="outline" v-if="!inspection.completedDate">
+                        Add modification
+                    </ion-button>
                     <ion-button>
                         Save inspection
                     </ion-button>
