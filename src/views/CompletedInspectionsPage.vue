@@ -27,7 +27,7 @@
 
     // Fetch the inspections when the component is mounted
     onMounted(() => {
-        inspections.fetchCompletedInspections();
+        inspections.completedInspectionsData();
     })
 </script>
 
