@@ -36,8 +36,10 @@
     <ion-page>
         <ion-content>
             <div class="wrapper">
-                <!-- TODO: dynamically change link based on where you came from (scheduled / completed) -->
-                <router-link to="/scheduled">
+                <router-link to="/completed" v-if="inspection?.completedDate">
+                    Back to completed inspections
+                </router-link>
+                <router-link to="/scheduled" v-else>
                     Back to scheduled inspections
                 </router-link>
                 <h1>Inspection #{{ route.params.id }}</h1>
