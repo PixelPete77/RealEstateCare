@@ -26,7 +26,6 @@ export const useUserStore = defineStore('user', () => {
             await updateUserProfile(firstName, lastName); // Update the profile data in the fake database
             user.value.firstName = firstName; // Update the user's name
             user.value.lastName = lastName;
-            console.log('Profile updated successfully', user.value.firstName, user.value.lastName); // Log success message
             return { success: true };
         } catch (error) {
             // Do something when the profile update fails
