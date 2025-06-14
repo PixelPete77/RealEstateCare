@@ -1,18 +1,30 @@
 <script setup>
-    import { computed, onMounted } from 'vue';
+    import { computed, onMounted, ref, toRaw, watch } from 'vue';
     import { RouterLink, useRoute } from 'vue-router';
     import { useInspectionsStore } from '@/stores/inspectionsStore';
     import { InspectionFormDamage, InspectionFormInstallation, InspectionFormMaintenance, InspectionFormModification } from '@/components/inspection';
     import loaderAnim from '@/components/loader/loaderAnim.vue';
-    import { IonButton, IonContent, IonPage } from '@ionic/vue';
+    import { IonButton, IonContent, IonPage, IonToast } from '@ionic/vue';
     import { formatDate } from '@/composables/formatDate';
 
     const route = useRoute();
     const inspections = useInspectionsStore();
 
+    const toastClass = ref('');
+    const toastMessage = ref('');
+    const toastShow = ref(false);
+    const setOpen = () => {
+        toastShow.value = !toastShow.value;
+    }
+
     // --- Computed properties -------------------------
 
-    const inspection = computed(() => inspections.inspection);
+    const inspection = ref();
+
+    // Watch for changes in the inspection data and create a copy of it
+    watch(() => inspections.inspection, (newInspection) => {
+        inspection.value = structuredClone(toRaw(newInspection)); // Create a copy of the inspection data, so we can store changes without changing the original data
+    }, { immediate: true });
 
     // Format the inspection date
     const formattedDate = computed(() => formatDate(inspection.value.date));
@@ -23,6 +35,30 @@
     const loading = computed(() => {
         return inspections.loadingStatus === 'loading';
     })
+
+    // Update inspection data in the store when the user saves the changes to the inspection
+    const handleSaveInspection = async () => {
+        const result = await inspections.updateInspection(route.params.id, inspection.value);
+
+        if (result.success) {
+            toastMessage.value = 'Inspection saved successfully';
+            toastShow.value = true;
+            toastClass.value = 'toast-success';
+        } else {
+            toastMessage.value = 'Failed to save inspection';
+            toastShow.value = true;
+            toastClass.value = 'toast-error';
+        }
+    }
+
+    // Update the local copy of the inspections data
+    function updateInspection(option, id, updatedItem) {
+        const optionArray = inspection.value[option]; // First target the correct option array in the inspection data
+        const foundIndex = optionArray.findIndex(x => x.id === id); // Find the index of the item in the array that matches the id (which was the key in the v-for loop)
+
+        optionArray[foundIndex] = updatedItem; // Update the item in the array with the updated data
+    }
+
 
     // --- Events --------------------------------------
 
@@ -67,9 +103,9 @@
                         Zip code: {{ inspection.address.zipCode }}
                     </p>
                 </div>
-                <form v-if="inspection">
+                <form v-if="inspection" @submit.prevent="handleSaveInspection()">
                     <h2 v-if="!inspection.completedDate || inspection.damage.length > 0">Record damage</h2>
-                    <InspectionFormDamage v-for="dmg in inspection.damage" :key="dmg.id" v-model="dmg" />
+                    <InspectionFormDamage v-for="dmg in inspection.damage" :key="dmg.id" :dmgData="dmg" @update-damage="localDmg => updateInspection('damage', dmg.id, localDmg)" />
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add damage
                     </ion-button>
@@ -88,7 +124,7 @@
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add modification
                     </ion-button>
-                    <ion-button>
+                    <ion-button type="submit">
                         Save inspection
                     </ion-button>
                 </form>
@@ -96,6 +132,7 @@
                     <p>Inspection not found.</p>
                 </template>
             </div>
+            <ion-toast swipe-gesture="vertical" :class="toastClass" :duration="5000" :is-open="toastShow" :message="toastMessage" @didDismiss="setOpen(false)"></ion-toast>
         </ion-content>
     </ion-page>
 </template>

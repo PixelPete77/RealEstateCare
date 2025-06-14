@@ -1,6 +1,6 @@
-import { computed, ref } from 'vue';
+import { ref, toRaw } from 'vue';
 import { defineStore } from 'pinia';
-import { fetchInspections, fetchInspection } from '@/services/inspectionService';
+import { fetchInspections, fetchInspection, updateInspectionInDb } from '@/services/inspectionService';
 import { useUserStore } from './userStore';
 
 export const useInspectionsStore = defineStore('inspections', () => {
@@ -53,7 +53,6 @@ export const useInspectionsStore = defineStore('inspections', () => {
         try {
             const data = await fetchInspection(id);
             inspection.value = data[0]; // Assuming the API returns an array, we take the first element and assign it to the inspection state
-            console.log('Fetched inspection:', inspection.value);
         } catch (error) {
             errors.value = error.message;
         } finally {
@@ -61,13 +60,26 @@ export const useInspectionsStore = defineStore('inspections', () => {
         }
     }
 
-    // Inpsection data can be retreived from existing inspections or fetched from the AP
+    // Inspection data can be retreived from existing inspections or fetched if not available
     const loadInspection = async (id) => {
         const existingInspection = getInspectionById(id); // Check if the inspection is already available
         if (existingInspection) {
             inspection.value = existingInspection; // If the inspection was found in the existing inspections, assign it to the inspection state
         } else {
             await inspectionById(id); // Otherwise, fetch it using the provided id
+        }
+    }
+
+    const updateInspection = async (id, data) => {
+        console.log('step 0');
+        try {
+            const cleanData = toRaw(data); // Ensure the data is not a proxy but a plain object
+            await updateInspectionInDb(id, cleanData); // Update the inspection data in the fake database
+            Object.assign(inspection.value, cleanData); // Mutate the inpection state with the new data
+
+            return { success: true };
+        } catch (error) {
+            return { success: false };
         }
     }
     
@@ -88,6 +100,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
         completedInspectionsData,
         scheduledInspectionsData,
         loadInspection,
+        updateInspection,
         getInspectionById
     }
 })
