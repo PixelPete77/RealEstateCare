@@ -69,7 +69,7 @@
                 </div>
                 <form v-if="inspection">
                     <h2 v-if="!inspection.completedDate || inspection.damage.length > 0">Record damage</h2>
-                    <InspectionFormDamage v-for="dmg in inspection.damage" :key="dmg.id" :dmg="dmg" />
+                    <InspectionFormDamage v-for="dmg in inspection.damage" :key="dmg.id" v-model="dmg" />
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add damage
                     </ion-button>
