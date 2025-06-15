@@ -105,22 +105,45 @@
                 </div>
                 <form v-if="inspection" @submit.prevent="handleSaveInspection()">
                     <h2 v-if="!inspection.completedDate || inspection.damage.length > 0">Record damage</h2>
-                    <InspectionFormDamage v-for="dmg in inspection.damage" :key="dmg.id" :dmgData="dmg" @update-damage="localDmg => updateInspection('damage', dmg.id, localDmg)" />
+                    <InspectionFormDamage 
+                        v-for="dmg in inspection.damage" 
+                        :key="dmg.id" 
+                        :dmgData="dmg" 
+                        @update-damage="localDmg => updateInspection('damage', dmg.id, localDmg)" 
+                    />
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add damage
                     </ion-button>
+
                     <h2 v-if="!inspection.completedDate || inspection.maintenance.length > 0">Record deferred maintenance</h2>
-                    <InspectionFormMaintenance v-for="mntnc in inspection.maintenance" :key="mntnc.id" :mntnc="mntnc" />
+                    <InspectionFormMaintenance 
+                        v-for="mntnc in inspection.maintenance" 
+                        :key="mntnc.id" 
+                        :mntncData="mntnc" 
+                        @update-mntnc="localMntnc => updateInspection('maintenance', mntnc.id, localMntnc)" 
+                    />
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add maintenance
                     </ion-button>
+
                     <h2 v-if="!inspection.completedDate || inspection.installations.length > 0">Inspect technical installations</h2>
-                    <InspectionFormInstallation v-for="instal in inspection.installations" :key="instal.id" :instal="instal"/>
+                    <InspectionFormInstallation 
+                        v-for="instal in inspection.installations" 
+                        :key="instal.id" 
+                        :instalData="instal" 
+                        @update-instal="localInstal => updateInspection('installations', instal.id, localInstal)" 
+                    />
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add inspect installation
                     </ion-button>
+
                     <h2 v-if="!inspection.completedDate || inspection.modifications.length > 0">Inventory modifications</h2>
-                    <InspectionFormModification v-for="mod in inspection.modifications" :key="mod.id" :mod="mod"/>
+                    <InspectionFormModification 
+                        v-for="mod in inspection.modifications" 
+                        :key="mod.id" 
+                        :modData="mod" 
+                        @update-mod="localMod => updateInspection('modifications', mod.id, localMod)" 
+                    />
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add modification
                     </ion-button>
