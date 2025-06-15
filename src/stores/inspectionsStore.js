@@ -71,7 +71,6 @@ export const useInspectionsStore = defineStore('inspections', () => {
     }
 
     const updateInspection = async (id, data) => {
-        console.log('step 0');
         try {
             const cleanData = toRaw(data); // Ensure the data is not a proxy but a plain object
             await updateInspectionInDb(id, cleanData); // Update the inspection data in the fake database

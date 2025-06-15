@@ -124,9 +124,11 @@
                     <ion-button fill="outline" v-if="!inspection.completedDate">
                         Add modification
                     </ion-button>
-                    <ion-button type="submit">
-                        Save inspection
-                    </ion-button>
+                    <div>
+                        <ion-button type="submit">
+                            Save inspection
+                        </ion-button>
+                    </div>
                 </form>
                 <template v-else>
                     <p>Inspection not found.</p>
@@ -160,6 +162,17 @@
 
         @media screen and (min-width: 30rem) {
             align-items: start;
+        }
+
+        & > div {
+            position: sticky;
+            bottom: 0;
+            inline-size: 100%;
+            background: color-mix(in srgb, var(--c-wrapper-bg) 65%, transparent);
+            backdrop-filter: blur(2px);
+            margin-inline: -1rem;
+            padding: 1rem;
+            z-index: 10;
         }
     }
 </style>

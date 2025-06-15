@@ -20,7 +20,6 @@
     
     const emitUpdate = () => {
         emit('update-damage', localDmg); // Emit updated data to the parent component when something in the local damage object changes
-        console.log('Damage updated:', localDmg);
     };
 </script>
 
