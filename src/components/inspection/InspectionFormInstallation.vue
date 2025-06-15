@@ -13,6 +13,10 @@
         instalData: {
             type: Object,
             required: true
+        },
+        index: {
+            type: Number,
+            required: true
         }
     })
 
@@ -27,7 +31,7 @@
 
 <template>
     <fieldset>
-        <legend>Technical installation {{ localInstal.id }}</legend>
+        <legend>Technical installation {{ index + 1 }}</legend>
         <ion-input label="Location" label-placement="stacked" fill="outline" placeholder="Enter the location" v-model="localInstal.location" @ionChange="emitUpdate"></ion-input>
         <ion-select label="Type of installation" label-placement="stacked" fill="outline" placeholder="Select a type of installation" v-model="localInstal.type" @ionChange="emitUpdate">
             <ion-select-option value="cooling">Cooling</ion-select-option>

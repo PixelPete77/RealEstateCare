@@ -12,6 +12,10 @@
         modData: {
             type: Object,
             required: true
+        },
+        index: {
+            type: Number,
+            required: true
         }
     })
 
@@ -27,7 +31,7 @@
 
 <template>
     <fieldset>
-        <legend>Modification {{ localMod.id }}</legend>
+        <legend>Modification {{ index + 1 }}</legend>
         <!-- TODO: add link to PDF doc -->
         <ion-label>Existing situation and already documented modifications:</ion-label>
         <router-link to="">

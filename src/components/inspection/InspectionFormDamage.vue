@@ -11,9 +11,13 @@
         dmgData: {
             type: Object,
             required: true
+        },
+        index: {
+            type: Number,
+            required: true
         }
     })
-
+    console.log('index prop:', props.index, typeof props.index);
     const emit = defineEmits(['update-damage']);
     
     const localDmg = reactive({...props.dmgData }); // Create a local copy of the damage object, spread the properties of the passed prop and make it reactive
@@ -25,7 +29,7 @@
 
 <template>
     <fieldset>
-        <legend>Damage {{ localDmg.id }}</legend>
+        <legend>Damage {{ index + 1 }}</legend>
         <ion-input label="Location" label-placement="stacked" fill="outline" placeholder="Enter the location" v-model="localDmg.location" @ionChange="emitUpdate"></ion-input>
         <ion-select label="Type of damage" label-placement="stacked" fill="outline" placeholder="Select a type of damage" v-model="localDmg.type" @ionChange="emitUpdate">
             <ion-select-option value="intentional">Intentional</ion-select-option>

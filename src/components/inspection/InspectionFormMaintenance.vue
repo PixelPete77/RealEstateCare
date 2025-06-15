@@ -10,6 +10,10 @@
         mntncData: {
             type: Object,
             required: true
+        },
+        index: {
+            type: Number,
+            required: true
         }
     })
 
@@ -24,7 +28,7 @@
 
 <template>
     <fieldset>
-        <legend>Deferred maintenance {{ localMntnc.id }}</legend>
+        <legend>Deferred maintenance {{ index + 1 }}</legend>
         <ion-input label="Location" label-placement="stacked" fill="outline" placeholder="Enter the location" v-model="localMntnc.location" @ionChange="emitUpdate"></ion-input>
         <ion-select label="Type of maintenance" label-placement="stacked" fill="outline" placeholder="Select a type of maintenance" v-model="localMntnc.type" @ionChange="emitUpdate">
             <ion-select-option value="painting">Painting</ion-select-option>
