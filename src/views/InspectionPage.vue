@@ -153,7 +153,7 @@
                         :index="index" 
                         @update-instal="localInstal => updateInspection('installations', instal.id, localInstal)" 
                     />
-                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('installation')">
+                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('installations')">
                         Add inspect installation
                     </ion-button>
 
@@ -165,7 +165,7 @@
                         :index="index" 
                         @update-mod="localMod => updateInspection('modifications', mod.id, localMod)" 
                     />
-                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('modification')">
+                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('modifications')">
                         Add modification
                     </ion-button>
                     <div>
@@ -211,12 +211,20 @@
         & > div {
             position: sticky;
             bottom: 0;
-            inline-size: 100%;
+            inline-size: calc(100% + 2rem);
             background: color-mix(in srgb, var(--c-wrapper-bg) 65%, transparent);
             backdrop-filter: blur(2px);
             margin-inline: -1rem;
             padding: 1rem;
             z-index: 10;
+
+            & ion-button {
+                inline-size: 100%;
+
+                @media screen and (min-width: 30rem) {
+                    inline-size: auto;
+                }
+            }
         }
     }
 </style>
