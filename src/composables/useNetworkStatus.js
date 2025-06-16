@@ -1,3 +1,4 @@
+import { ref, onUnmounted } from 'vue';
 
 export const useNetworkStatus = () => {
     const isOnline = ref(navigator.onLine); // Initialize the online status
@@ -17,5 +18,5 @@ export const useNetworkStatus = () => {
         window.removeEventListener('offline', updateOnlineStatus);
     });
 
-    return { isOnline };
+    return isOnline;
 }
