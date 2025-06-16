@@ -1,5 +1,7 @@
 import { ref, toRaw } from 'vue';
 import { defineStore } from 'pinia';
+import { useNetworkStatus } from '@/composables/useNetworkStatus';
+import { saveQueueToLocalStorage } from '@/composables/useOfflineInspectionStorage';
 import { fetchInspections, fetchInspection, updateInspectionInDb } from '@/services/inspectionService';
 import { useUserStore } from './userStore';
 
@@ -9,6 +11,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
     const errors = ref(null);
     const inspections = ref([]);
     const inspection = ref(null);
+    const isOnline  = useNetworkStatus();
     const loadingStatus = ref('loading');
     const userStore = useUserStore();
 
@@ -60,8 +63,8 @@ export const useInspectionsStore = defineStore('inspections', () => {
         }
     }
 
-    // Inspection data can be retreived from existing inspections or fetched if not available
     const loadInspection = async (id) => {
+        // Inspection data can be retreived from existing inspections or fetched if not available
         const existingInspection = getInspectionById(id); // Check if the inspection is already available
         if (existingInspection) {
             inspection.value = existingInspection; // If the inspection was found in the existing inspections, assign it to the inspection state
@@ -71,11 +74,18 @@ export const useInspectionsStore = defineStore('inspections', () => {
     }
 
     const updateInspection = async (id, data) => {
+        const cleanData = toRaw(data); // Ensure the data is not a proxy but a plain object
+
+        if (!isOnline.value) {
+            saveQueueToLocalStorage(id, cleanData);  // Send the data to be saved in the local storage if the user is offline
+            Object.assign(inspection.value, cleanData); // Mutate the inpection state with the new data
+            return { success: true };
+        }
+
         try {
-            const cleanData = toRaw(data); // Ensure the data is not a proxy but a plain object
             await updateInspectionInDb(id, cleanData); // Update the inspection data in the fake database
             Object.assign(inspection.value, cleanData); // Mutate the inpection state with the new data
-
+            console.log('Inspection updated successfully:', inspection.value);
             return { success: true };
         } catch (error) {
             return { success: false };
