@@ -24,7 +24,6 @@ export const fetchInspection = async (id) => {
 }
 
 export const updateInspectionInDb = async (id, cleanData) => {
-    console.log('Updating inspection in the fake database:', id, cleanData);
     await new Promise(resolve => setTimeout(resolve, 300));
     return true;
 }

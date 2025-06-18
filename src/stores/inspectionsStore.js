@@ -1,19 +1,21 @@
 import { ref, toRaw } from 'vue';
 import { defineStore } from 'pinia';
 import { useNetworkStatus } from '@/composables/useNetworkStatus';
-import { saveQueueToLocalStorage } from '@/composables/useOfflineInspectionStorage';
+import { useOfflineInspectionStorage } from '@/composables/useOfflineInspectionStorage';
 import { fetchInspections, fetchInspection, updateInspectionInDb } from '@/services/inspectionService';
 import { useUserStore } from './userStore';
 
 export const useInspectionsStore = defineStore('inspections', () => {
+    const { addQueueToLocalStorage } = useOfflineInspectionStorage();
+    const isOnline  = useNetworkStatus();
+    const userStore = useUserStore();
+
     // State
     const completedInspections = ref([]);
     const errors = ref(null);
     const inspections = ref([]);
     const inspection = ref(null);
-    const isOnline  = useNetworkStatus();
     const loadingStatus = ref('loading');
-    const userStore = useUserStore();
 
     // Actions
     const completedInspectionsData = async () => {
@@ -77,7 +79,7 @@ export const useInspectionsStore = defineStore('inspections', () => {
         const cleanData = toRaw(data); // Ensure the data is not a proxy but a plain object
 
         if (!isOnline.value) {
-            saveQueueToLocalStorage(id, cleanData);  // Send the data to be saved in the local storage if the user is offline
+            addQueueToLocalStorage(id, cleanData);  // Send the data to be saved in the local storage if the user is offline
             Object.assign(inspection.value, cleanData); // Mutate the inpection state with the new data
             return { success: true };
         }
