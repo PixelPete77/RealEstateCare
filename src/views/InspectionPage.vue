@@ -32,7 +32,10 @@
 
     // Watch for changes in the inspection data and create a copy of it
     watch(() => inspections.inspection, (newInspection) => {
-        inspection.value = structuredClone(toRaw(newInspection)); // Create a copy of the inspection data, so we can store changes without changing the original data
+        // Only create a copy if valid inspection data is available (not null and has an ID)
+        if (newInspection && newInspection.id) {
+            inspection.value = structuredClone(toRaw(newInspection)); // Create a deep copy of the inspection data, so we can store changes without changing the original data
+        }
     }, { immediate: true });
 
     // Add a new item to the inspection data using the factory function based on the type
@@ -77,7 +80,7 @@
     })
 
 
-    // --- Events --------------------------------------
+    // --- Events -----------1---------------------------
 
     // Get the inspection data when the component is mounted
     onMounted(() => {
@@ -97,7 +100,7 @@
                 </router-link>
                 <h1>Inspection #{{ route.params.id }}</h1>
                 <!-- Show loading indicator when fetching data -->
-                <div class="loader" v-if="loading">
+                <div class="loader" v-if="loading && !inspection">
                     <loaderAnim />
                     <p>Loading inspection</p>
                 </div>
