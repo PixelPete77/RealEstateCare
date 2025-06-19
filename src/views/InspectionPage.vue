@@ -30,6 +30,11 @@
         toastShow.value = !toastShow.value;
     }
 
+    // Watch for changes in the route parameters to make sure the correct inspection data is loaded
+    watch(() => route.params.id, async (newId) => {
+        await inspections.loadInspection(newId);
+    });
+
     // Watch for changes in the inspection data and create a copy of it
     watch(() => inspections.inspection, (newInspection) => {
         // Only create a copy if valid inspection data is available (not null and has an ID)
@@ -80,7 +85,7 @@
     })
 
 
-    // --- Events -----------1---------------------------
+    // --- Events --------------------------------------
 
     // Get the inspection data when the component is mounted
     onMounted(() => {
@@ -92,91 +97,94 @@
     <ion-page>
         <ion-content>
             <div class="wrapper">
-                <router-link to="/completed" v-if="inspection?.completedDate">
-                    Back to completed inspections
-                </router-link>
-                <router-link to="/scheduled" v-if="!inspection?.completedDate">
-                    Back to scheduled inspections
-                </router-link>
-                <h1>Inspection #{{ route.params.id }}</h1>
                 <!-- Show loading indicator when fetching data -->
                 <div class="loader" v-if="loading && !inspection">
                     <loaderAnim />
                     <p>Loading inspection</p>
                 </div>
                 <!-- Show inspection data when available -->
-                <div class="info" v-if="inspection">
-                    <p>
-                        <strong>Date:</strong><br>
-                        {{ formattedDate }}<br>
-                        <br>
-                        <template v-if="inspection.completedDate">
-                            <strong>Completed on:</strong><br>
-                            {{ formattedCompletedDate }}
-                        </template>
-                    </p>
-                    <p>
-                        <strong>Address:</strong><br>
-                        Street: {{ inspection.address.street }}<br>
-                        City: {{ inspection.address.city }}<br>
-                        Province: {{ inspection.address.province }}<br>
-                        Zip code: {{ inspection.address.zipCode }}
-                    </p>
-                </div>
-                <form v-if="inspection" @submit.prevent="handleSaveInspection()">
-                    <h2 v-if="!inspection.completedDate || inspection.damage.length > 0">Record damage</h2>
-                    <InspectionFormDamage 
-                        v-for="(dmg, index) in inspection.damage" 
-                        :key="dmg.id" 
-                        :dmgData="dmg" 
-                        :index="index" 
-                        @update-damage="localDmg => updateInspection('damage', dmg.id, localDmg)" 
-                    />
-                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('damage')">
-                        Add damage
-                    </ion-button>
-
-                    <h2 v-if="!inspection.completedDate || inspection.maintenance.length > 0">Record deferred maintenance</h2>
-                    <InspectionFormMaintenance 
-                        v-for="(mntnc, index) in inspection.maintenance" 
-                        :key="mntnc.id" 
-                        :mntncData="mntnc" 
-                        :index="index" 
-                        @update-mntnc="localMntnc => updateInspection('maintenance', mntnc.id, localMntnc)" 
-                    />
-                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('maintenance')">
-                        Add maintenance
-                    </ion-button>
-
-                    <h2 v-if="!inspection.completedDate || inspection.installations.length > 0">Inspect technical installations</h2>
-                    <InspectionFormInstallation 
-                        v-for="(instal, index) in inspection.installations" 
-                        :key="instal.id" 
-                        :instalData="instal" 
-                        :index="index" 
-                        @update-instal="localInstal => updateInspection('installations', instal.id, localInstal)" 
-                    />
-                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('installations')">
-                        Add inspect installation
-                    </ion-button>
-
-                    <h2 v-if="!inspection.completedDate || inspection.modifications.length > 0">Inventory modifications</h2>
-                    <InspectionFormModification 
-                        v-for="(mod, index) in inspection.modifications" 
-                        :key="mod.id" 
-                        :modData="mod" 
-                        :index="index" 
-                        @update-mod="localMod => updateInspection('modifications', mod.id, localMod)" 
-                    />
-                    <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('modifications')">
-                        Add modification
-                    </ion-button>
-                    <div>
-                        <ion-button type="submit">
-                            Save inspection
-                        </ion-button>
+                <template v-if="!loading && inspection">
+                    <router-link to="/completed" v-if="inspection.completedDate">
+                        Back to completed inspections
+                    </router-link>
+                    <router-link to="/scheduled" v-if="!inspection.completedDate">
+                        Back to scheduled inspections
+                    </router-link>
+                    <h1>Inspection #{{ route.params.id }}</h1>
+                    <div class="info">
+                        <p>
+                            <strong>Date:</strong><br>
+                            {{ formattedDate }}<br>
+                            <br>
+                            <template v-if="inspection.completedDate">
+                                <strong>Completed on:</strong><br>
+                                {{ formattedCompletedDate }}
+                            </template>
+                        </p>
+                        <p>
+                            <strong>Address:</strong><br>
+                            Street: {{ inspection.address.street }}<br>
+                            City: {{ inspection.address.city }}<br>
+                            Province: {{ inspection.address.province }}<br>
+                            Zip code: {{ inspection.address.zipCode }}
+                        </p>
                     </div>
-                </form>
+                    <form v-if="inspection" @submit.prevent="handleSaveInspection()">
+                        <h2 v-if="!inspection.completedDate || inspection.damage.length > 0">Record damage</h2>
+                        <InspectionFormDamage 
+                            v-for="(dmg, index) in inspection.damage" 
+                            :key="dmg.id" 
+                            :dmgData="dmg" 
+                            :index="index" 
+                            @update-damage="localDmg => updateInspection('damage', dmg.id, localDmg)" 
+                        />
+                        <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('damage')">
+                            Add damage
+                        </ion-button>
+    
+                        <h2 v-if="!inspection.completedDate || inspection.maintenance.length > 0">Record deferred maintenance</h2>
+                        <InspectionFormMaintenance 
+                            v-for="(mntnc, index) in inspection.maintenance" 
+                            :key="mntnc.id" 
+                            :mntncData="mntnc" 
+                            :index="index" 
+                            @update-mntnc="localMntnc => updateInspection('maintenance', mntnc.id, localMntnc)" 
+                        />
+                        <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('maintenance')">
+                            Add maintenance
+                        </ion-button>
+    
+                        <h2 v-if="!inspection.completedDate || inspection.installations.length > 0">Inspect technical installations</h2>
+                        <InspectionFormInstallation 
+                            v-for="(instal, index) in inspection.installations" 
+                            :key="instal.id" 
+                            :instalData="instal" 
+                            :index="index" 
+                            @update-instal="localInstal => updateInspection('installations', instal.id, localInstal)" 
+                        />
+                        <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('installations')">
+                            Add inspect installation
+                        </ion-button>
+    
+                        <h2 v-if="!inspection.completedDate || inspection.modifications.length > 0">Inventory modifications</h2>
+                        <InspectionFormModification 
+                            v-for="(mod, index) in inspection.modifications" 
+                            :key="mod.id" 
+                            :modData="mod" 
+                            :index="index" 
+                            @update-mod="localMod => updateInspection('modifications', mod.id, localMod)" 
+                        />
+                        <ion-button fill="outline" v-if="!inspection.completedDate" @click="addItem('modifications')">
+                            Add modification
+                        </ion-button>
+                        <div>
+                            <ion-button type="submit">
+                                Save inspection
+                            </ion-button>
+                        </div>
+                    </form>
+                </template>
+                <!-- Show message if inspection is not found -->
                 <template v-else>
                     <p>Inspection not found.</p>
                 </template>

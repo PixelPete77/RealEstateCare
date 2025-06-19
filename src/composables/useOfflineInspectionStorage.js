@@ -5,8 +5,7 @@ import { updateInspectionInDb } from '@/services/inspectionService';
 const isOnline = useNetworkStatus();
 
 const getQueue = () => {
-    const queue = localStorage.getItem('inspection-queue');
-    return queue ? JSON.parse(queue) : []; // Retrieve the queue from localStorage or return an empty array if it doesn't exist
+    return JSON.parse(localStorage.getItem('inspection-queue') || []); // Retrieve the queue from localStorage or return an empty array if it doesn't exist
 };
 
 const saveQueue = (queue) => {
@@ -22,7 +21,7 @@ const flushQueue = async () => {
     for (const { id, data } of queue) {
         try {
             await updateInspectionInDb(id, data); // Update the inspection in the database with the stored data
-        } catch (err) {
+        } catch {
             remaining.push({ id, data }); // Keep failed items in case of an error
         }
     }
