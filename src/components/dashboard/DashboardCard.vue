@@ -21,10 +21,32 @@
 </template>
 
 <style scoped>
-    .dashboard-card {
+    :root.light .dashboard-card {
         --dashboard-bg: rgb(255 255 255 / .8);
-        --dashboard-card-icon-color: var(--c-primary);
         --dashboard-shadow-color: 0deg 0% 63%;
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root.md:not(.dark):not(.light) .dashboard-card {
+            --dashboard-bg: rgb(255 255 255 / .8);
+            --dashboard-shadow-color: 0deg 0% 63%;
+        }
+    }
+
+    :root.dark .dashboard-card {
+        --dashboard-bg: rgb(41 52 57 / .85);
+        --dashboard-shadow-color: 0deg 0% 0%;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root.md:not(.dark):not(.light) .dashboard-card {
+            --dashboard-bg: rgb(41 52 57 / .85);
+            --dashboard-shadow-color: 0deg 0% 0%;
+        }
+    }
+
+    .dashboard-card {
+        --dashboard-card-icon-color: var(--c-primary);
         --dashboard-shadow: 0 .4px .5px hsl(var(--dashboard-shadow-color) / 0.33),
                             0 1.2px 1.3px -0.8px hsl(var(--dashboard-shadow-color) / 0.33),
                             .1px 3px 3.4px -1.7px hsl(var(--dashboard-shadow-color) / 0.33),
@@ -46,11 +68,6 @@
         padding: 1rem;
         text-align: center;
         text-decoration: none;
-
-        @media (prefers-color-scheme: dark) {
-            --dashboard-bg: rgb(41 52 57 / .85);
-            --dashboard-shadow-color: 0deg 0% 0%;
-        }
     }
 
     :deep(svg) {
