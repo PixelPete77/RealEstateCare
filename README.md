@@ -6,7 +6,7 @@ I enjoyed working on this project a lot. Especially the fact that you start work
 
 ## Users
 
-To be able to log in to the application, a few 'inspectors' have been added:
+To be able to log in to the application, a few fictional 'inspectors' have been added:
 
 - Inspector 1  
     Username: inspector1@realestatecare.com  
