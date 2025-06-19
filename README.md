@@ -4,6 +4,23 @@ This project is developed using [Vue.js](https://vuejs.org/), as part of the fin
 
 I enjoyed working on this project a lot. Especially the fact that you start working on what will be the final assignment from the start of the module.
 
+## Users
+
+To be able to log in to the application, a few 'inspectors' have been added:
+
+- Inspector 1  
+    Username: inspector1@realestatecare.com  
+    Password: Inspector1  
+- Inspector 2
+    Username: inspector2@realestatecare.com  
+    Password: Inspector2
+- Inspector 3
+    Username: inspector3@realestatecare.com  
+    Password: Inspector3
+
+The security code for all three users is: 123456.
+
+
 ## Security, usability and accessibility
 
 A router guard has been implemented to check if a user is allowed to access certain pages. When they are not authenticated, they will be redirected to the login page.
