@@ -9,6 +9,7 @@
     <ion-toolbar color="dark">
         <router-link to="/">
             <img src="/src/assets/images/RealEstateCare_logo.svg" class="logo" slot="start">
+            <span class="sr-only">RealEstateCare</span>
         </router-link>
         <div slot="end">
             <SettingsButton />

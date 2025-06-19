@@ -27,6 +27,7 @@
         <ion-content>
             <div class="wrapper">
                 <img src="/src/assets/images/RealEstateCare_logo_v.svg">
+                <span class="sr-only">RealEstateCare</span>
                 <h1>Login</h1>
                 <AuthLoginForm v-if="step === 'login'" @login-success="step = 'verify'" /> <!-- Change the step to 'verify' when the login is successful -->
                 <AuthVerificationForm v-if="step === 'verify'" @verification-success="router.push('/')" /> <!-- Redirect to the dashboard page if the verification is successful -->
